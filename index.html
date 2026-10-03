@@ -17,7 +17,7 @@
   <!-- ══════════════ پس‌زمینه سایدبار موبایل ══════════════ -->
   <div class="backdrop"></div>
 
-  <!-- ══════════════ سایدبار ══════════════ -->
+  <!-- ══════════════ سایدبار ساده‌شده: ۶ آیتم با زیرنویس توضیحی ══════════════ -->
   <aside class="sidebar" aria-label="منوی اصلی">
     <div class="brand">
       <span class="brand-logo"><i class="bi bi-mortarboard-fill"></i></span>
@@ -28,18 +28,43 @@
     </div>
 
     <nav class="sidebar-nav sidebar-scroll">
-      <div class="nav-caption">اصلی</div>
-      <a href="#" class="side-link active" data-view="dashboard"><i class="bi bi-speedometer2"></i>داشبورد</a>
-      <a href="#" class="side-link" data-view="students"><i class="bi bi-people"></i>دانش‌آموزان</a>
-      <a href="#" class="side-link" data-view="attendance"><i class="bi bi-calendar2-check"></i>حضور و غیاب</a>
-      <a href="#" class="side-link" data-view="grades"><i class="bi bi-journal-check"></i>نمرات و امتحانات</a>
-      <a href="#" class="side-link" data-view="reports"><i class="bi bi-graph-up-arrow"></i>گزارش‌ها و نمودارها</a>
+      <div class="nav-caption">منوی اصلی</div>
+      <a href="#" class="side-link active" data-view="dashboard">
+        <i class="bi bi-house-door"></i>
+        <span class="side-wrap"><span class="side-txt">خانه</span><span class="side-sub">همهٔ کارها از همین‌جا</span></span>
+      </a>
 
-      <div class="nav-caption">ارتباط و تحلیل</div>
-      <a href="#" class="side-link" data-view="ai"><i class="bi bi-robot"></i>دستیار هوشمند<span class="n-badge">جدید</span></a>
-      <a href="#" class="side-link" data-view="messages"><i class="bi bi-chat-dots"></i>پیام‌های والدین<span class="n-badge" id="navMsgBadge">۶</span></a>
-      <a href="#" class="side-link" data-view="teachers"><i class="bi bi-person-video3"></i>معلمان و کلاس‌ها</a>
+      <div class="nav-caption">کارهای روزانه</div>
+      <a href="#" class="side-link" data-view="attendance">
+        <i class="bi bi-calendar2-check"></i>
+        <span class="side-wrap"><span class="side-txt">حضور و غیاب</span><span class="side-sub">ثبت در ۳ گام + خبر به والدین</span></span>
+      </a>
+      <a href="#" class="side-link" data-view="messages">
+        <i class="bi bi-chat-dots"></i>
+        <span class="side-wrap"><span class="side-txt">پیام‌ها</span><span class="side-sub">پیامک‌های ارسالی به والدین</span></span>
+        <span class="n-badge" id="navMsgBadge">۵</span>
+      </a>
+
+      <div class="nav-caption">امور آموزشی</div>
+      <a href="#" class="side-link" data-view="students">
+        <i class="bi bi-people"></i>
+        <span class="side-wrap"><span class="side-txt">دانش‌آموزان و کلاس‌ها</span><span class="side-sub">فهرست، کارنامه و معلمان</span></span>
+      </a>
+      <a href="#" class="side-link" data-view="grades">
+        <i class="bi bi-journal-check"></i>
+        <span class="side-wrap"><span class="side-txt">نمرات و امتحانات</span><span class="side-sub">ثبت نمره و تقویم امتحانات</span></span>
+      </a>
+
+      <div class="nav-caption">کمک‌کننده‌ها</div>
+      <a href="#" class="side-link" data-view="ai">
+        <i class="bi bi-robot"></i>
+        <span class="side-wrap"><span class="side-txt">دستیار هوشمند</span><span class="side-sub">پرسش به زبان ساده</span></span>
+      </a>
     </nav>
+
+    <div class="side-help">
+      <button class="btn btn-tour w-100" id="btnSideTour"><i class="bi bi-patch-question-fill me-1"></i> راهنمای گام‌به‌گام سایت</button>
+    </div>
 
     <div class="side-user">
       <span class="avatar sm av-teal">م‌ر</span>
@@ -47,7 +72,7 @@
         <div class="name">مریم رستگار</div>
         <div class="role">مدیر مدرسه</div>
       </div>
-      <button class="logout" title="خروج" aria-label="خروج" onclick="toast('خروج از حساب — نسخه نمایشی','bi-box-arrow-left')"><i class="bi bi-box-arrow-left"></i></button>
+      <button class="logout" title="خروج" aria-label="خروج" onclick="toast('خروج از حساب — نسخهٔ نمایشی','bi-box-arrow-left')"><i class="bi bi-box-arrow-left"></i></button>
     </div>
   </aside>
 
@@ -58,8 +83,8 @@
     <header class="topbar">
       <button class="icon-btn d-lg-none" id="burger" aria-label="باز کردن منو"><i class="bi bi-list"></i></button>
       <div class="me-2 d-none d-sm-block">
-        <h1 class="page-title" id="pageTitle">داشبورد</h1>
-        <div class="crumb" id="pageCrumb">نمای کلی وضعیت مدرسه</div>
+        <h1 class="page-title" id="pageTitle">خانه</h1>
+        <div class="crumb" id="pageCrumb">کارهای امروز از همین‌جا شروع می‌شود</div>
       </div>
 
       <div class="top-search d-none d-md-block">
@@ -71,6 +96,11 @@
         <span class="d-none d-lg-inline-flex align-items-center gap-1 text-muted" style="font-size:.75rem">
           <i class="bi bi-calendar3"></i> <span data-today>—</span>
         </span>
+
+        <!-- دکمهٔ همیشگی راهنما: مدیر هیچ‌وقت گم نمی‌شود -->
+        <button class="icon-btn" id="btnTopTour" aria-label="راهنما" title="راهنمای گام‌به‌گام">
+          <i class="bi bi-patch-question"></i>
+        </button>
 
         <div class="dropdown">
           <button class="icon-btn" data-bs-toggle="dropdown" aria-label="اعلان‌ها" title="اعلان‌ها">
@@ -105,7 +135,7 @@
             <div class="px-2 py-1"><b style="font-size:.82rem">مریم رستگار</b><div class="text-muted" style="font-size:.7rem">مدیر مدرسهٔ نمونهٔ پایش</div></div>
             <hr class="dropdown-divider">
             <a class="dropdown-item rounded-3" href="#" style="font-size:.8rem" onclick="toast('پروفایل — نسخه نمایشی','bi-person');return false;"><i class="bi bi-person"></i> پروفایل من</a>
-            <a class="dropdown-item rounded-3" href="#" style="font-size:.8rem" onclick="toast('تنظیمات — نسخه نمایشی','bi-gear');return false;"><i class="bi bi-gear"></i> تنظیمات سامانه</a>
+            <a class="dropdown-item rounded-3" href="#" style="font-size:.8rem" onclick="toast('تنظیمات سامانه — نسخه نمایشی','bi-gear');return false;"><i class="bi bi-gear"></i> تنظیمات سامانه</a>
             <a class="dropdown-item rounded-3 text-danger" href="#" style="font-size:.8rem" onclick="toast('خروج — نسخه نمایشی','bi-box-arrow-left');return false;"><i class="bi bi-box-arrow-left"></i> خروج</a>
           </div>
         </div>
@@ -115,29 +145,90 @@
     <!-- محتوا -->
     <main class="content">
 
-      <!-- ═══════════ داشبورد ═══════════ -->
+      <!-- ═══════════ خانه — مرکز کارها (وظیفه‌محور برای مدیر) ═══════════ -->
       <section id="view-dashboard" class="view">
         <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-4">
           <div>
             <h2 id="greet">صبح بخیر، خانم مدیر 🌤</h2>
-            <p class="text-muted mb-0" style="font-size:.82rem">امروز <span data-today>—</span> — خلاصهٔ وضعیت مدرسهٔ نمونهٔ پایش</p>
+            <p class="text-muted mb-0" style="font-size:.82rem">امروز <span data-today>—</span> — هر کاری لازم دارید از کارت‌های زیر شروع کنید</p>
           </div>
-          <button class="btn btn-brand" onclick="showView('ai')"><i class="bi bi-robot me-1"></i> تحلیل هوشمند وضعیت</button>
+          <div class="d-flex gap-2">
+            <button class="btn btn-ghost" onclick="showView('ai')"><i class="bi bi-robot me-1"></i> تحلیل هوشمند</button>
+            <button class="btn btn-brand" onclick="showView('attendance')"><i class="bi bi-calendar2-check me-1"></i> ثبت حضور و غیاب امروز</button>
+          </div>
         </div>
 
-        <!-- کارت‌های آمار -->
+        <!-- کارهای پرتکرار: ۵ کارت بزرگ (نقشهٔ راه مدیر) -->
+        <div class="section-cap"><i class="bi bi-lightning-charge-fill"></i> کارهای پرتکرار — فقط یک کلیک</div>
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6 col-xl-4">
+            <button class="task-card tc-brand" onclick="showView('attendance')">
+              <span class="task-icon"><i class="bi bi-calendar2-check-fill"></i></span>
+              <span class="task-body">
+                <span class="task-t">ثبت حضور و غیاب</span>
+                <span class="task-s">در ۳ گام ساده — غیبت‌ها خودکار به والدین پیامک می‌شود</span>
+                <span class="chip down mt-2">۳ غایب و تأخیر امروز</span>
+              </span>
+              <i class="bi bi-chevron-left task-arrow"></i>
+            </button>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-4">
+            <button class="task-card tc-emerald" onclick="showView('messages')">
+              <span class="task-icon"><i class="bi bi-chat-dots-fill"></i></span>
+              <span class="task-body">
+                <span class="task-t">پیام به والدین</span>
+                <span class="task-s">پیامک‌های ارسال‌شده و ارسال پیام جدید</span>
+                <span class="chip flat mt-2">۵ پیام اخیر</span>
+              </span>
+              <i class="bi bi-chevron-left task-arrow"></i>
+            </button>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-4">
+            <button class="task-card tc-amber" onclick="showView('grades')">
+              <span class="task-icon"><i class="bi bi-journal-check"></i></span>
+              <span class="task-body">
+                <span class="task-t">نمرات و امتحانات</span>
+                <span class="task-s">ثبت نمرهٔ آزمون‌ها و تقویم امتحانات</span>
+              </span>
+              <i class="bi bi-chevron-left task-arrow"></i>
+            </button>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-4">
+            <button class="task-card tc-rose" onclick="showView('students')">
+              <span class="task-icon"><i class="bi bi-people-fill"></i></span>
+              <span class="task-body">
+                <span class="task-t">دانش‌آموزان و کلاس‌ها</span>
+                <span class="task-s">فهرست دانش‌آموزان، کارنامه و معلمان — هر سه در یک صفحه</span>
+              </span>
+              <i class="bi bi-chevron-left task-arrow"></i>
+            </button>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-4">
+            <button class="task-card tc-violet" onclick="showView('ai')">
+              <span class="task-icon"><i class="bi bi-robot"></i></span>
+              <span class="task-body">
+                <span class="task-t">دستیار هوشمند</span>
+                <span class="task-s">سؤال بپرسید به زبان ساده؛ پاسخ از داده‌های همین سامانه</span>
+              </span>
+              <i class="bi bi-chevron-left task-arrow"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- وضعیت امروز: ۴ کارت آمار (اعداد مستقیم در HTML) -->
+        <div class="section-cap"><i class="bi bi-activity"></i> وضعیت امروز در یک نگاه</div>
         <div class="row g-3 mb-4">
           <div class="col-12 col-sm-6 col-xl-3">
             <div class="card-soft stat-card">
               <div class="d-flex justify-content-between align-items-start">
                 <div>
-                  <div class="stat-num" id="statStudents">—</div>
+                  <div class="stat-num">۱٬۲۴۸</div>
                   <div class="stat-label">دانش‌آموز فعال</div>
                   <span class="chip up mt-1"><i class="bi bi-arrow-up-short"></i>۳٫۲٪ این ماه</span>
                 </div>
                 <div>
                   <span class="stat-icon bg-soft-brand"><i class="bi bi-people-fill"></i></span>
-                  <div class="mt-2" id="spStudents" style="width:96px"></div>
+                  <div class="mt-2" style="width:96px"><svg viewBox="0 0 96 34"><polyline points="96,30 76.8,21.529411764705884 57.6,17.647058823529413 38.4,15.176470588235293 19.200000000000003,10.588235294117645 0,6" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="96" cy="30" r="3.2" fill="#0d9488"></circle></svg></div>
                 </div>
               </div>
             </div>
@@ -146,13 +237,13 @@
             <div class="card-soft stat-card">
               <div class="d-flex justify-content-between align-items-start">
                 <div>
-                  <div class="stat-num" id="statAttend">—</div>
+                  <div class="stat-num">۹۳٪</div>
                   <div class="stat-label">درصد حضور امروز</div>
                   <span class="chip down mt-1"><i class="bi bi-arrow-down-short"></i>۱٪ نسبت به دیروز</span>
                 </div>
                 <div>
                   <span class="stat-icon bg-soft-emerald"><i class="bi bi-calendar2-check-fill"></i></span>
-                  <div class="mt-2" id="spAttend" style="width:96px"></div>
+                  <div class="mt-2" style="width:96px"><svg viewBox="0 0 96 34"><polyline points="96,10 72,22 48,6 24,30 0,14" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="96" cy="10" r="3.2" fill="#10b981"></circle></svg></div>
                 </div>
               </div>
             </div>
@@ -161,13 +252,13 @@
             <div class="card-soft stat-card">
               <div class="d-flex justify-content-between align-items-start">
                 <div>
-                  <div class="stat-num" id="statGpa">—</div>
+                  <div class="stat-num">۱۶٫۴</div>
                   <div class="stat-label">میانگین نمرات مدرسه</div>
                   <span class="chip up mt-1"><i class="bi bi-arrow-up-short"></i>۰٫۲ نسبت به ماه قبل</span>
                 </div>
                 <div>
                   <span class="stat-icon bg-soft-amber"><i class="bi bi-award-fill"></i></span>
-                  <div class="mt-2" id="spGpa" style="width:96px"></div>
+                  <div class="mt-2" style="width:96px"><svg viewBox="0 0 96 34"><polyline points="96,30 72,22 48,26 24,14 0,6" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="96" cy="30" r="3.2" fill="#f59e0b"></circle></svg></div>
                 </div>
               </div>
             </div>
@@ -176,20 +267,20 @@
             <div class="card-soft stat-card">
               <div class="d-flex justify-content-between align-items-start">
                 <div>
-                  <div class="stat-num" id="statAbsent">—</div>
+                  <div class="stat-num">۳</div>
                   <div class="stat-label">غایب و تأخیر امروز</div>
                   <span class="chip flat mt-1">پیام به والدین ارسال شد</span>
                 </div>
                 <div>
                   <span class="stat-icon bg-soft-rose"><i class="bi bi-person-x-fill"></i></span>
-                  <div class="mt-2" id="spAbsent" style="width:96px"></div>
+                  <div class="mt-2" style="width:96px"><svg viewBox="0 0 96 34"><polyline points="96,6 72,30 48,14 24,22 0,22" fill="none" stroke="#e11d48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="96" cy="6" r="3.2" fill="#e11d48"></circle></svg></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- نمودارها -->
+        <!-- نمودارها (SVG ثابت داخل HTML) -->
         <div class="row g-3 mb-4">
           <div class="col-lg-8">
             <div class="card-soft h-100">
@@ -198,7 +289,7 @@
                 <span class="chip flat">۵ روز کاری اخیر</span>
               </div>
               <div class="card-body">
-                <div class="chart-wrap" id="chartWeekly"></div>
+                <div class="chart-wrap"><svg viewBox="0 0 640 250" role="img" aria-label="نمودار خطی"><linearGradient id="grad-w-0" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d9488" stop-opacity="0.28"></stop><stop offset="100%" stop-color="#0d9488" stop-opacity="0"></stop></linearGradient><line x1="14" x2="596" y1="216" y2="216" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="220" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۸۰٪</text><line x1="14" x2="596" y1="166" y2="166" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="170" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۸۵٪</text><line x1="14" x2="596" y1="116" y2="116" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="120" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۹۰٪</text><line x1="14" x2="596" y1="66" y2="66" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="70" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۹۵٪</text><line x1="14" x2="596" y1="16" y2="16" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="20" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۱۰۰٪</text><text x="596" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">شنبه</text><text x="450.5" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">یکشنبه</text><text x="305" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">دوشنبه</text><text x="159.5" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">سه‌شنبه</text><text x="14" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">چهارشنبه</text><path d="M 596 76 C 571.75 81, 499 107.66666666666666, 450.5 105.99999999999999 C 402 104.33333333333331, 353.5 62.666666666666664, 305 66 C 256.5 69.33333333333334, 208 122.66666666666667, 159.5 126 C 111 129.33333333333334, 38.25 92.66666666666667, 14 86 L 14 216 L 596 216 Z" fill="url(#grad-w-0)"></path><path d="M 596 76 C 571.75 81, 499 107.66666666666666, 450.5 105.99999999999999 C 402 104.33333333333331, 353.5 62.666666666666664, 305 66 C 256.5 69.33333333333334, 208 122.66666666666667, 159.5 126 C 111 129.33333333333334, 38.25 92.66666666666667, 14 86" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="596" cy="76" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="596" y="66" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۹۴٪</text><circle cx="450.5" cy="105.99999999999999" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="450.5" y="95.99999999999999" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۹۱٪</text><circle cx="305" cy="66" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="305" y="56" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۹۵٪</text><circle cx="159.5" cy="126" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="159.5" y="116" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۸۹٪</text><circle cx="14" cy="86" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="14" y="76" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۹۳٪</text><path d="M 596 96 C 571.75 94.33333333333333, 499 84.33333333333334, 450.5 86 C 402 87.66666666666666, 353.5 104.33333333333331, 305 105.99999999999999 C 256.5 107.66666666666666, 208 94.33333333333333, 159.5 96 C 111 97.66666666666667, 38.25 112.66666666666667, 14 116" fill="none" stroke="#cbd5d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"></path></svg></div>
                 <div class="legend mt-3">
                   <span class="li"><span class="swatch" style="background:#0d9488"></span>مدرسهٔ ما</span>
                   <span class="li"><span class="swatch" style="background:#cbd5d3"></span>میانگین منطقه</span>
@@ -210,14 +301,19 @@
             <div class="card-soft h-100">
               <div class="card-head"><h6><i class="bi bi-pie-chart text-success me-1"></i> توزیع وضعیت تحصیلی</h6></div>
               <div class="card-body d-flex flex-column align-items-center justify-content-center gap-3">
-                <div class="chart-wrap" id="chartDist" style="max-width:230px"></div>
-                <div class="legend justify-content-center" id="distLegend"></div>
+                <div class="chart-wrap" style="max-width:230px"><svg viewBox="0 0 210 210" role="img" aria-label="نمودار دونات"><circle cx="105" cy="105" r="78" fill="none" stroke="#edf3f2" stroke-width="24"></circle><circle cx="105" cy="105" r="78" fill="none" stroke="#10b981" stroke-width="24" stroke-dasharray="163.63007434640264 490.0884539600077" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 105 105)"></circle><circle cx="105" cy="105" r="78" fill="none" stroke="#0d9488" stroke-width="24" stroke-dasharray="212.6389197424034 490.0884539600077" stroke-dashoffset="-166.63007434640264" stroke-linecap="round" transform="rotate(-90 105 105)"></circle><circle cx="105" cy="105" r="78" fill="none" stroke="#f59e0b" stroke-width="24" stroke-dasharray="70.51326809400115 490.0884539600077" stroke-dashoffset="-382.26899408880604" stroke-linecap="round" transform="rotate(-90 105 105)"></circle><circle cx="105" cy="105" r="78" fill="none" stroke="#e11d48" stroke-width="24" stroke-dasharray="31.306191777200546 490.0884539600077" stroke-dashoffset="-455.7822621828072" stroke-linecap="round" transform="rotate(-90 105 105)"></circle><text x="105" y="103" font-size="21" fill="#12332d" text-anchor="middle" font-weight="800" class="donut-center">۱٬۲۴۸</text><text x="105" y="123" font-size="10.5" fill="#8aa39e" text-anchor="middle" font-weight="500">دانش‌آموز</text></svg></div>
+                <div class="legend justify-content-center">
+                  <span class="li"><span class="swatch" style="background:#10b981"></span>عالی (۳۴٪)</span>
+                  <span class="li"><span class="swatch" style="background:#0d9488"></span>خوب (۴۴٪)</span>
+                  <span class="li"><span class="swatch" style="background:#f59e0b"></span>نیازمند تلاش (۱۵٪)</span>
+                  <span class="li"><span class="swatch" style="background:#e11d48"></span>ضعیف (۷٪)</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- غایبین و برترین‌ها -->
+        <!-- غایبین و برترین‌ها (داده‌ها مستقیم در HTML) -->
         <div class="row g-3">
           <div class="col-lg-6">
             <div class="card-soft h-100">
@@ -225,81 +321,122 @@
                 <div><h6><i class="bi bi-person-x text-danger me-1"></i> غایبین و تأخیر امروز</h6><span class="hint">پیامک اطلاع‌رسانی به‌صورت خودکار برای والدین ارسال شد</span></div>
                 <button class="btn btn-ghost btn-sm-brand" onclick="showView('attendance')">ثبت حضور و غیاب</button>
               </div>
-              <div class="card-body pt-1" id="absentList"></div>
+              <div class="card-body pt-1">
+                <div class="row-item">
+                  <span class="avatar sm av-rose">اق</span>
+                  <div>
+                    <div class="t">امیر قاسمی</div>
+                    <div class="s">پایهٔ نهم — کلاس ۲ • غایب</div>
+                  </div>
+                  <div class="end">
+                    <span class="status-pill st-danger">غایب</span>
+                    <div class="s mt-1"><i class="bi bi-check2-circle text-success"></i> پیام به والدین ارسال شد</div>
+                  </div>
+                </div>
+                <div class="row-item">
+                  <span class="avatar sm av-violet">رش</span>
+                  <div>
+                    <div class="t">رضا شریفی</div>
+                    <div class="s">پایهٔ هشتم — کلاس ۱ • غایب</div>
+                  </div>
+                  <div class="end">
+                    <span class="status-pill st-danger">غایب</span>
+                    <div class="s mt-1"><i class="bi bi-check2-circle text-success"></i> پیام به والدین ارسال شد</div>
+                  </div>
+                </div>
+                <div class="row-item">
+                  <span class="avatar sm av-teal">کم</span>
+                  <div>
+                    <div class="t">کیان مرادی</div>
+                    <div class="s">پایهٔ هفتم — کلاس ۱ • تأخیر در ورود</div>
+                  </div>
+                  <div class="end">
+                    <span class="status-pill st-warn">تأخیر</span>
+                    <div class="s mt-1"><i class="bi bi-check2-circle text-success"></i> پیام به والدین ارسال شد</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="card-soft h-100">
               <div class="card-head">
                 <div><h6><i class="bi bi-trophy text-warning me-1"></i> برترین دانش‌آموزان</h6><span class="hint">بر اساس معدل کل سال تحصیلی</span></div>
-                <button class="btn btn-ghost btn-sm-brand" onclick="showView('reports')">مشاهدهٔ گزارش‌ها</button>
+                <button class="btn btn-ghost btn-sm-brand" onclick="openReportTab()">مشاهدهٔ کارنامه‌ها</button>
               </div>
-              <div class="card-body pt-1" id="topList"></div>
+              <div class="card-body pt-1">
+                <div class="row-item">
+                  <span class="fw-bold text-muted" style="width:1.4rem">۱</span>
+                  <span class="avatar sm av-amber">فک</span>
+                  <div>
+                    <div class="t">فاطمه کریمی</div>
+                    <div class="s">پایهٔ سوم — کلاس ۱</div>
+                    <div class="track mt-1" style="height:6px;background:#edf3f2;border-radius:99px;max-width:170px">
+                      <div class="fill" style="width:98%;background:linear-gradient(90deg,#14b8a6,#0f766e)"></div>
+                    </div>
+                  </div>
+                  <div class="end"><b class="text-success">۱۹٫۶۰</b></div>
+                </div>
+                <div class="row-item">
+                  <span class="fw-bold text-muted" style="width:1.4rem">۲</span>
+                  <span class="avatar sm av-rose">مع</span>
+                  <div>
+                    <div class="t">مریم عباسی</div>
+                    <div class="s">پایهٔ نهم — کلاس ۱</div>
+                    <div class="track mt-1" style="height:6px;background:#edf3f2;border-radius:99px;max-width:170px">
+                      <div class="fill" style="width:96%;background:linear-gradient(90deg,#14b8a6,#0f766e)"></div>
+                    </div>
+                  </div>
+                  <div class="end"><b class="text-success">۱۹٫۲۰</b></div>
+                </div>
+                <div class="row-item">
+                  <span class="fw-bold text-muted" style="width:1.4rem">۳</span>
+                  <span class="avatar sm av-teal">عر</span>
+                  <div>
+                    <div class="t">علی رضایی</div>
+                    <div class="s">پایهٔ نهم — کلاس ۱</div>
+                    <div class="track mt-1" style="height:6px;background:#edf3f2;border-radius:99px;max-width:170px">
+                      <div class="fill" style="width:92%;background:linear-gradient(90deg,#14b8a6,#0f766e)"></div>
+                    </div>
+                  </div>
+                  <div class="end"><b class="text-success">۱۸٫۴۰</b></div>
+                </div>
+                <div class="row-item">
+                  <span class="fw-bold text-muted" style="width:1.4rem">۴</span>
+                  <span class="avatar sm av-emerald">نا</span>
+                  <div>
+                    <div class="t">نگار احمدی</div>
+                    <div class="s">پایهٔ اول — کلاس ۲</div>
+                    <div class="track mt-1" style="height:6px;background:#edf3f2;border-radius:99px;max-width:170px">
+                      <div class="fill" style="width:90.5%;background:linear-gradient(90deg,#14b8a6,#0f766e)"></div>
+                    </div>
+                  </div>
+                  <div class="end"><b class="text-success">۱۸٫۱۰</b></div>
+                </div>
+                <div class="row-item">
+                  <span class="fw-bold text-muted" style="width:1.4rem">۵</span>
+                  <span class="avatar sm av-violet">زن</span>
+                  <div>
+                    <div class="t">زهرا نوری</div>
+                    <div class="s">پایهٔ سوم — کلاس ۱</div>
+                    <div class="track mt-1" style="height:6px;background:#edf3f2;border-radius:99px;max-width:170px">
+                      <div class="fill" style="width:89.5%;background:linear-gradient(90deg,#14b8a6,#0f766e)"></div>
+                    </div>
+                  </div>
+                  <div class="end"><b class="text-success">۱۷٫۹۰</b></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ═══════════ دانش‌آموزان ═══════════ -->
-      <section id="view-students" class="view d-none">
-        <div class="page-head">
-          <div>
-            <h2>مدیریت دانش‌آموزان</h2>
-            <p>فهرست کامل دانش‌آموزان به تفکیک پایه، کلاس و وضعیت تحصیلی</p>
-          </div>
-          <button class="btn btn-brand" id="btnAddStudent"><i class="bi bi-person-plus me-1"></i> افزودن دانش‌آموز</button>
-        </div>
-
-        <div class="card-soft mb-3">
-          <div class="card-body">
-            <div class="row g-2 align-items-center">
-              <div class="col-6 col-md-2">
-                <label class="form-label">پایه</label>
-                <select class="form-select" id="fGrade"></select>
-              </div>
-              <div class="col-6 col-md-2">
-                <label class="form-label">کلاس</label>
-                <select class="form-select" id="fClass"></select>
-              </div>
-              <div class="col-6 col-md-2">
-                <label class="form-label">وضعیت تحصیلی</label>
-                <select class="form-select" id="fStatus">
-                  <option value="all">همهٔ وضعیت‌ها</option>
-                  <option>عالی</option><option>خوب</option><option>نیازمند تلاش</option><option>ضعیف</option>
-                </select>
-              </div>
-              <div class="col-6 col-md-4">
-                <label class="form-label">جستجو</label>
-                <input type="search" class="form-control" id="searchStudent" placeholder="نام یا کد دانش‌آموزی...">
-              </div>
-              <div class="col-md-2 text-md-start">
-                <label class="form-label d-none d-md-block">&nbsp;</label>
-                <span class="chip flat"><i class="bi bi-funnel"></i> <span id="studentCount">۰</span> نتیجه</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-soft">
-          <div class="table-responsive" style="max-height:62vh;overflow-y:auto">
-            <table class="table table-clean table-hover align-middle">
-              <thead class="position-sticky top-0 bg-white" style="z-index:5">
-                <tr>
-                  <th>دانش‌آموز</th><th>پایه</th><th>کلاس</th><th>معدل</th><th>درصد حضور</th><th>وضعیت</th><th>عملیات</th>
-                </tr>
-              </thead>
-              <tbody id="studentTbody"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══════════ حضور و غیاب ═══════════ -->
+      <!-- ═══════════ حضور و غیاب — ویزارد ۳ گامی (داده‌های تستی مستقیم در HTML) ═══════════ -->
       <section id="view-attendance" class="view d-none">
         <div class="page-head">
           <div>
             <h2>ثبت حضور و غیاب</h2>
-            <p>وضعیت هر دانش‌آموز را ثبت کنید؛ در صورت غیبت، پیام اطلاع‌رسانی برای والدین ارسال می‌شود</p>
+            <p>فقط ۳ گام: کلاس را انتخاب کنید ← وضعیت‌ها را علامت بزنید ← تأیید و ارسال پیام به والدین</p>
           </div>
           <div class="date-nav">
             <button class="btn-icon-ghost" aria-label="روز قبل" onclick="toast('انتخاب تاریخ — نسخه نمایشی','bi-calendar3')"><i class="bi bi-chevron-right"></i></button>
@@ -308,54 +445,235 @@
           </div>
         </div>
 
-        <div class="card-soft mb-3">
-          <div class="card-body">
-            <div class="row g-2 align-items-end">
-              <div class="col-6 col-md-3">
-                <label class="form-label">پایه</label>
-                <select class="form-select" id="attGrade"></select>
+        <!-- نوار پیشرفت گام‌ها -->
+        <div class="wiz-progress" id="attProg" aria-label="مراحل ثبت حضور و غیاب">
+          <div class="wstep active" data-w="1"><span class="wnum">۱</span><span class="wt">انتخاب کلاس</span></div>
+          <div class="wline"></div>
+          <div class="wstep" data-w="2"><span class="wnum">۲</span><span class="wt">ثبت وضعیت</span></div>
+          <div class="wline"></div>
+          <div class="wstep" data-w="3"><span class="wnum">۳</span><span class="wt">تأیید و ارسال</span></div>
+        </div>
+
+        <!-- گام ۱: انتخاب کلاس (۵ کلاس نمونه — داده مستقیم در HTML) -->
+        <div class="att-step" id="attStep1">
+          <div class="card-soft">
+            <div class="card-head">
+              <h6><i class="bi bi-easel2 text-success me-1"></i> کلاس موردنظر را انتخاب کنید</h6>
+              <span class="hint" id="attClsHint">۵ کلاس فعال</span>
+            </div>
+            <div class="card-body">
+              <div class="row g-3" id="attClassCards">
+                <div class="col-12 col-sm-6 col-lg-4">
+                  <button type="button" class="cls-card" data-grade="اول" data-cls="۲" data-teacher="سمانه نوروزی" data-count="۲۶">
+                    <span class="cls-badge av-emerald">اول ۲</span>
+                    <span class="cls-t">پایهٔ اول — کلاس ۲</span>
+                    <span class="cls-s"><i class="bi bi-person-video3"></i> معلم: سمانه نوروزی</span>
+                    <span class="cls-s"><i class="bi bi-people"></i> ۲۶ دانش‌آموز</span>
+                  </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                  <button type="button" class="cls-card" data-grade="سوم" data-cls="۱" data-teacher="نرگس محمدی" data-count="۲۳">
+                    <span class="cls-badge av-amber">سوم ۱</span>
+                    <span class="cls-t">پایهٔ سوم — کلاس ۱</span>
+                    <span class="cls-s"><i class="bi bi-person-video3"></i> معلم: نرگس محمدی</span>
+                    <span class="cls-s"><i class="bi bi-people"></i> ۲۳ دانش‌آموز</span>
+                  </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                  <button type="button" class="cls-card" data-grade="هفتم" data-cls="۲" data-teacher="مینا اکبری" data-count="۲۷">
+                    <span class="cls-badge av-violet">هفتم ۲</span>
+                    <span class="cls-t">پایهٔ هفتم — کلاس ۲</span>
+                    <span class="cls-s"><i class="bi bi-person-video3"></i> معلم: مینا اکبری</span>
+                    <span class="cls-s"><i class="bi bi-people"></i> ۲۷ دانش‌آموز</span>
+                  </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                  <button type="button" class="cls-card" data-grade="نهم" data-cls="۱" data-teacher="پویا صالحی" data-count="۲۵">
+                    <span class="cls-badge av-teal">نهم ۱</span>
+                    <span class="cls-t">پایهٔ نهم — کلاس ۱</span>
+                    <span class="cls-s"><i class="bi bi-person-video3"></i> معلم: پویا صالحی</span>
+                    <span class="cls-s"><i class="bi bi-people"></i> ۲۵ دانش‌آموز</span>
+                  </button>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                  <button type="button" class="cls-card" data-grade="نهم" data-cls="۲" data-teacher="پویا صالحی" data-count="۲۴">
+                    <span class="cls-badge av-rose">نهم ۲</span>
+                    <span class="cls-t">پایهٔ نهم — کلاس ۲</span>
+                    <span class="cls-s"><i class="bi bi-person-video3"></i> معلم: پویا صالحی</span>
+                    <span class="cls-s"><i class="bi bi-people"></i> ۲۴ دانش‌آموز</span>
+                  </button>
+                </div>
               </div>
-              <div class="col-6 col-md-3">
-                <label class="form-label">کلاس</label>
-                <select class="form-select" id="attClass"></select>
+            </div>
+            <div class="card-body d-flex justify-content-end pt-0">
+              <button class="btn btn-brand" id="attToStep2" disabled>ادامه ← گام ۲ (ثبت وضعیت)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- گام ۲: ثبت وضعیت (۵ ردیف دادهٔ تستی مستقیم در HTML) -->
+        <div class="att-step d-none" id="attStep2">
+          <div class="card-soft mb-3">
+            <div class="card-body">
+              <div class="row g-2 align-items-center">
+                <div class="col-md-5">
+                  <span class="chip flat p-2" id="attSelClass"><i class="bi bi-easel2"></i> کلاسی انتخاب نشده</span>
+                </div>
+                <div class="col-md-7 d-flex flex-wrap gap-2 justify-content-md-end">
+                  <span class="chip up p-2"><i class="bi bi-check-circle"></i> حاضر: <b id="cntPresent">۰</b></span>
+                  <span class="chip down p-2"><i class="bi bi-x-circle"></i> غایب: <b id="cntAbsent">۰</b></span>
+                  <span class="chip flat p-2" style="background:var(--amber-soft);color:#b45309"><i class="bi bi-clock"></i> تأخیر: <b id="cntLate">۰</b></span>
+                  <span class="chip flat p-2"><i class="bi bi-file-text"></i> مجوز: <b id="cntExcused">۰</b></span>
+                </div>
               </div>
-              <div class="col-12 col-md-6 d-flex flex-wrap gap-2 justify-content-md-end">
-                <span class="chip up p-2"><i class="bi bi-check-circle"></i> حاضر: <b id="cntPresent">۰</b></span>
-                <span class="chip down p-2"><i class="bi bi-x-circle"></i> غایب: <b id="cntAbsent">۰</b></span>
-                <span class="chip flat p-2" style="background:var(--amber-soft);color:#b45309"><i class="bi bi-clock"></i> تأخیر: <b id="cntLate">۰</b></span>
-                <span class="chip flat p-2"><i class="bi bi-file-text"></i> مجوز: <b id="cntExcused">۰</b></span>
+              <div class="text-muted mt-2" style="font-size:.7rem"><i class="bi bi-info-circle"></i> فهرست نمونهٔ نمایشی است؛ در نسخهٔ اصلی، دانش‌آموزانِ همان کلاس بارگذاری می‌شوند.</div>
+            </div>
+          </div>
+
+          <div class="card-soft">
+            <div class="card-head">
+              <h6><i class="bi bi-check2-square text-success me-1"></i> وضعیت هر دانش‌آموز را علامت بزنید</h6>
+              <span class="hint">روی حاضر / غایب / تأخیر / مجوز کلیک کنید</span>
+            </div>
+            <div class="table-responsive" style="max-height:52vh;overflow-y:auto">
+              <table class="table table-clean align-middle">
+                <thead class="position-sticky top-0 bg-white" style="z-index:5">
+                  <tr><th>دانش‌آموز</th><th>والدین</th><th class="d-none d-md-table-cell">تماس اضطراری</th><th>وضعیت امروز</th><th>نتیجه</th></tr>
+                </thead>
+                <tbody id="attTbody">
+                  <tr data-id="۱۰۴۲" data-name="علی رضایی" data-parent="آقای رضایی" data-phone="۰۹۱۲۳۴۵۶۷۸۹" data-status="present">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-teal">عر</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">علی رضایی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۲ — کلاس ۱</div></div>
+                    </div></td>
+                    <td>آقای رضایی</td>
+                    <td class="d-none d-md-table-cell">۰۹۱۲۳۴۵۶۷۸۹</td>
+                    <td><div class="seg">
+                      <button type="button" class="seg-btn present" data-v="present"><i class="bi bi-check-circle"></i>حاضر</button>
+                      <button type="button" class="seg-btn" data-v="absent"><i class="bi bi-x-circle"></i>غایب</button>
+                      <button type="button" class="seg-btn" data-v="late"><i class="bi bi-clock"></i>تأخیر</button>
+                      <button type="button" class="seg-btn" data-v="excused"><i class="bi bi-file-earmark-text"></i>مجوز</button>
+                    </div></td>
+                    <td><span class="status-pill st-excellent" data-pill>حاضر</span></td>
+                  </tr>
+                  <tr data-id="۱۰۴۳" data-name="سارا موسوی" data-parent="خانم موسوی" data-phone="۰۹۱۲۱۱۱۲۲۳۳" data-status="present">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-emerald">سم</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">سارا موسوی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۳ — کلاس ۱</div></div>
+                    </div></td>
+                    <td>خانم موسوی</td>
+                    <td class="d-none d-md-table-cell">۰۹۱۲۱۱۱۲۲۳۳</td>
+                    <td><div class="seg">
+                      <button type="button" class="seg-btn present" data-v="present"><i class="bi bi-check-circle"></i>حاضر</button>
+                      <button type="button" class="seg-btn" data-v="absent"><i class="bi bi-x-circle"></i>غایب</button>
+                      <button type="button" class="seg-btn" data-v="late"><i class="bi bi-clock"></i>تأخیر</button>
+                      <button type="button" class="seg-btn" data-v="excused"><i class="bi bi-file-earmark-text"></i>مجوز</button>
+                    </div></td>
+                    <td><span class="status-pill st-excellent" data-pill>حاضر</span></td>
+                  </tr>
+                  <tr data-id="۱۰۴۴" data-name="مریم عباسی" data-parent="آقای عباسی" data-phone="۰۹۳۵۴۴۴۵۵۶۶" data-status="present">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-amber">مع</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">مریم عباسی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۴ — کلاس ۱</div></div>
+                    </div></td>
+                    <td>آقای عباسی</td>
+                    <td class="d-none d-md-table-cell">۰۹۳۵۴۴۴۵۵۶۶</td>
+                    <td><div class="seg">
+                      <button type="button" class="seg-btn present" data-v="present"><i class="bi bi-check-circle"></i>حاضر</button>
+                      <button type="button" class="seg-btn" data-v="absent"><i class="bi bi-x-circle"></i>غایب</button>
+                      <button type="button" class="seg-btn" data-v="late"><i class="bi bi-clock"></i>تأخیر</button>
+                      <button type="button" class="seg-btn" data-v="excused"><i class="bi bi-file-earmark-text"></i>مجوز</button>
+                    </div></td>
+                    <td><span class="status-pill st-excellent" data-pill>حاضر</span></td>
+                  </tr>
+                  <tr data-id="۱۰۴۵" data-name="آرش کاظمی" data-parent="آقای کاظمی" data-phone="۰۹۱۹۸۸۸۷۷۶۶" data-status="late">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-violet">آک</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">آرش کاظمی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۵ — کلاس ۱</div></div>
+                    </div></td>
+                    <td>آقای کاظمی</td>
+                    <td class="d-none d-md-table-cell">۰۹۱۹۸۸۸۷۷۶۶</td>
+                    <td><div class="seg">
+                      <button type="button" class="seg-btn"><i class="bi bi-check-circle"></i>حاضر</button>
+                      <button type="button" class="seg-btn" data-v="absent"><i class="bi bi-x-circle"></i>غایب</button>
+                      <button type="button" class="seg-btn late" data-v="late"><i class="bi bi-clock"></i>تأخیر</button>
+                      <button type="button" class="seg-btn" data-v="excused"><i class="bi bi-file-earmark-text"></i>مجوز</button>
+                    </div></td>
+                    <td><span class="status-pill st-warn" data-pill>تأخیر</span></td>
+                  </tr>
+                  <tr data-id="۱۰۴۶" data-name="امیر قاسمی" data-parent="آقای قاسمی" data-phone="۰۹۱۲۷۷۷۸۸۹۹" data-status="absent">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-rose">اق</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">امیر قاسمی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۶ — کلاس ۲</div></div>
+                    </div></td>
+                    <td>آقای قاسمی</td>
+                    <td class="d-none d-md-table-cell">۰۹۱۲۷۷۷۸۸۹۹</td>
+                    <td><div class="seg">
+                      <button type="button" class="seg-btn"><i class="bi bi-check-circle"></i>حاضر</button>
+                      <button type="button" class="seg-btn absent" data-v="absent"><i class="bi bi-x-circle"></i>غایب</button>
+                      <button type="button" class="seg-btn" data-v="late"><i class="bi bi-clock"></i>تأخیر</button>
+                      <button type="button" class="seg-btn" data-v="excused"><i class="bi bi-file-earmark-text"></i>مجوز</button>
+                    </div></td>
+                    <td><span class="status-pill st-danger" data-pill>غایب</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-body d-flex justify-content-between flex-wrap gap-2 pt-0">
+              <button class="btn btn-ghost" id="attBack1"><i class="bi bi-chevron-right me-1"></i> بازگشت (انتخاب کلاس)</button>
+              <button class="btn btn-brand" id="attToStep3">ادامه ← گام ۳ (تأیید و ارسال)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- گام ۳: تأیید و ارسال -->
+        <div class="att-step d-none" id="attStep3">
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-soft h-100">
+                <div class="card-head"><h6><i class="bi bi-clipboard-check text-success me-1"></i> بازبینی نهایی</h6><span class="hint">خلاصهٔ ثبت شما قبل از ارسال</span></div>
+                <div class="card-body">
+                  <div class="row text-center g-2 mb-3">
+                    <div class="col-6 col-md-3"><div class="review-box rb-ok"><div class="rb-num" id="revPresent">۰</div><div class="rb-t">حاضر</div></div></div>
+                    <div class="col-6 col-md-3"><div class="review-box rb-danger"><div class="rb-num" id="revAbsent">۰</div><div class="rb-t">غایب</div></div></div>
+                    <div class="col-6 col-md-3"><div class="review-box rb-warn"><div class="rb-num" id="revLate">۰</div><div class="rb-t">تأخیر</div></div></div>
+                    <div class="col-6 col-md-3"><div class="review-box rb-info"><div class="rb-num" id="revExcused">۰</div><div class="rb-t">مجوز</div></div></div>
+                  </div>
+                  <div class="text-muted" style="font-size:.75rem"><i class="bi bi-info-circle"></i> در صورت تأیید، وضعیت ثبت و پیام اطلاع‌رسانی برای والدینِ غایبین و تأخیری‌ها ارسال می‌شود.</div>
+                </div>
+                <div class="card-body d-flex justify-content-between flex-wrap gap-2 pt-0">
+                  <button class="btn btn-ghost" id="attBack2"><i class="bi bi-chevron-right me-1"></i> بازگشت (ویرایش وضعیت‌ها)</button>
+                  <button class="btn btn-brand" id="btnNotify"><i class="bi bi-send-check me-1"></i> تأیید نهایی و ارسال پیام</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-soft h-100">
+                <div class="card-head"><h6><i class="bi bi-send text-success me-1"></i> پیش‌نمایش پیامک والدین</h6></div>
+                <div class="card-body">
+                  <div class="sms-preview mb-3" id="smsBox"></div>
+                  <div class="text-muted" style="font-size:.7rem"><i class="bi bi-info-circle"></i> در نسخهٔ نهایی، پیامک از طریق سرویس پیام‌رسان مدرسه ارسال می‌شود.</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="row g-3">
-          <div class="col-lg-7 col-xl-8">
-            <div class="card-soft">
-              <div class="table-responsive" style="max-height:58vh;overflow-y:auto">
-                <table class="table table-clean align-middle">
-                  <thead class="position-sticky top-0 bg-white" style="z-index:5">
-                    <tr><th>دانش‌آموز</th><th>والدین</th><th class="d-none d-md-table-cell">تماس اضطراری</th><th>وضعیت امروز</th><th>نتیجه</th></tr>
-                  </thead>
-                  <tbody id="attTbody"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5 col-xl-4">
-            <div class="card-soft h-100">
-              <div class="card-head"><h6><i class="bi bi-send text-success me-1"></i> اطلاع‌رسانی خودکار به والدین</h6></div>
-              <div class="card-body">
-                <div class="sms-preview mb-3" id="smsBox"></div>
-                <button class="btn btn-brand w-100" id="btnNotify"><i class="bi bi-send-check me-1"></i> ثبت حضور و غیاب + ارسال پیام</button>
-                <div class="text-muted mt-2" style="font-size:.7rem"><i class="bi bi-info-circle"></i> در نسخهٔ نهایی، پیامک از طریق سرویس پیام‌رسان مدرسه ارسال می‌شود.</div>
-              </div>
+        <!-- پایان: ثبت موفق -->
+        <div class="att-step d-none" id="attDone">
+          <div class="card-soft done-card">
+            <div class="done-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <h5 class="mt-3 mb-1">ثبت با موفقیت انجام شد</h5>
+            <p class="text-muted" id="attDoneText" style="font-size:.85rem">—</p>
+            <div class="d-flex gap-2 justify-content-center flex-wrap mt-3">
+              <button class="btn btn-ghost" id="attRestart"><i class="bi bi-arrow-repeat me-1"></i> ثبت برای کلاس دیگر</button>
+              <button class="btn btn-brand" onclick="showView('dashboard')"><i class="bi bi-house-door me-1"></i> بازگشت به خانه</button>
             </div>
           </div>
         </div>
 
         <div class="card-soft mt-3">
-          <div class="card-head"><h6><i class="bi bi-clock-history text-success me-1"></i> سابقهٔ حضور و غیاب هفتهٔ اخیر</h6></div>
+          <div class="card-head"><h6><i class="bi bi-clock-history text-success me-1"></i> سابقهٔ حضور و غیاب هفتهٔ اخیر</h6><span class="hint">۵ روز کاری گذشته</span></div>
           <div class="table-responsive">
             <table class="table table-clean">
               <thead><tr><th>تاریخ</th><th>کلاس</th><th>حاضر</th><th>غایب</th><th>تأخیر</th><th>اطلاع‌رسانی</th></tr></thead>
@@ -371,7 +689,476 @@
         </div>
       </section>
 
-      <!-- ═══════════ نمرات و امتحانات ═══════════ -->
+      <!-- ═══════════ دانش‌آموزان و کلاس‌ها — ۳ تب: فهرست / کارنامه / معلمان ═══════════ -->
+      <section id="view-students" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>دانش‌آموزان و کلاس‌ها</h2>
+            <p>فهرست دانش‌آموزان، کارنامهٔ تحصیلی و معلمان — همه در یک صفحه و سه تب ساده</p>
+          </div>
+          <nav class="nav nav-pills-soft" id="svTabs" aria-label="بخش‌های دانش‌آموزان">
+            <button class="nav-link active" data-svtab="list"><i class="bi bi-people me-1"></i>فهرست دانش‌آموزان</button>
+            <button class="nav-link" data-svtab="report"><i class="bi bi-file-earmark-bar-graph me-1"></i>کارنامه و گزارش</button>
+            <button class="nav-link" data-svtab="teachers"><i class="bi bi-person-video3 me-1"></i>معلمان و کلاس‌ها</button>
+          </nav>
+        </div>
+
+        <!-- تب ۱: فهرست دانش‌آموزان (۵ ردیف دادهٔ تستی مستقیم در HTML) -->
+        <div id="paneStudentList">
+          <div class="card-soft mb-3">
+            <div class="card-body">
+              <div class="row g-2 align-items-center">
+                <div class="col-6 col-md-2">
+                  <label class="form-label">پایه</label>
+                  <select class="form-select" id="fGrade">
+                    <option value="all">همهٔ پایه‌ها</option>
+                    <option value="اول">پایهٔ اول</option>
+                    <option value="دوم">پایهٔ دوم</option>
+                    <option value="سوم">پایهٔ سوم</option>
+                    <option value="چهارم">پایهٔ چهارم</option>
+                    <option value="پنجم">پایهٔ پنجم</option>
+                    <option value="ششم">پایهٔ ششم</option>
+                    <option value="هفتم">پایهٔ هفتم</option>
+                    <option value="هشتم">پایهٔ هشتم</option>
+                    <option value="نهم">پایهٔ نهم</option>
+                  </select>
+                </div>
+                <div class="col-6 col-md-2">
+                  <label class="form-label">کلاس</label>
+                  <select class="form-select" id="fClass">
+                    <option value="all">همهٔ کلاس‌ها</option>
+                    <option value="۱">کلاس ۱</option>
+                    <option value="۲">کلاس ۲</option>
+                  </select>
+                </div>
+                <div class="col-6 col-md-2">
+                  <label class="form-label">وضعیت تحصیلی</label>
+                  <select class="form-select" id="fStatus">
+                    <option value="all">همهٔ وضعیت‌ها</option>
+                    <option>عالی</option><option>خوب</option><option>نیازمند تلاش</option><option>ضعیف</option>
+                  </select>
+                </div>
+                <div class="col-6 col-md-4">
+                  <label class="form-label">جستجو</label>
+                  <input type="search" class="form-control" id="searchStudent" placeholder="نام یا کد دانش‌آموزی...">
+                </div>
+                <div class="col-md-2 d-flex justify-content-between align-items-end">
+                  <span class="chip flat"><i class="bi bi-funnel"></i> <span id="studentCount">۰</span> نتیجه</span>
+                  <button class="btn btn-brand btn-sm-brand" id="btnAddStudent"><i class="bi bi-person-plus me-1"></i> افزودن</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-soft">
+            <div class="table-responsive" style="max-height:58vh;overflow-y:auto">
+              <table class="table table-clean table-hover align-middle">
+                <thead class="position-sticky top-0 bg-white" style="z-index:5">
+                  <tr>
+                    <th>دانش‌آموز</th><th>پایه</th><th>کلاس</th><th>معدل</th><th>درصد حضور</th><th>وضعیت</th><th>عملیات</th>
+                  </tr>
+                </thead>
+                <tbody id="studentTbody">
+                  <tr data-id="۱۰۴۲" data-name="علی رضایی" data-grade="نهم" data-cls="۱" data-gpa="18.4" data-attend="96" data-trend="1.2" data-status="عالی">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-teal">عر</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">علی رضایی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۲</div></div>
+                    </div></td>
+                    <td>پایهٔ نهم</td>
+                    <td>کلاس ۱</td>
+                    <td><b>۱۸٫۴۰</b> <span class="chip up"><i class="bi bi-arrow-up-short"></i>۱٫۲</span></td>
+                    <td>
+                      <div class="d-flex align-items-center gap-2">
+                        <div style="width:64px;height:6px;background:#edf3f2;border-radius:99px"><div class="fill" style="width:96%;height:100%;border-radius:99px;background:#10b981"></div></div>
+                        <span style="font-size:.75rem">۹۶٪</span>
+                      </div>
+                    </td>
+                    <td><span class="status-pill st-excellent">عالی</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="کارنامه" onclick="openReportTab()"><i class="bi bi-file-earmark-bar-graph"></i></button>
+                      <button class="btn-icon-ghost" title="ویرایش" onclick="toast('در نسخهٔ نمایشی، ویرایش فعال نیست','bi-info-circle')"><i class="bi bi-pencil"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-id="۱۰۴۶" data-name="امیر قاسمی" data-grade="نهم" data-cls="۲" data-gpa="12.6" data-attend="81" data-trend="-2.1" data-status="ضعیف">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-rose">اق</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">امیر قاسمی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۶</div></div>
+                    </div></td>
+                    <td>پایهٔ نهم</td>
+                    <td>کلاس ۲</td>
+                    <td><b>۱۲٫۶۰</b> <span class="chip down"><i class="bi bi-arrow-down-short"></i>۲٫۱</span></td>
+                    <td>
+                      <div class="d-flex align-items-center gap-2">
+                        <div style="width:64px;height:6px;background:#edf3f2;border-radius:99px"><div class="fill" style="width:81%;height:100%;border-radius:99px;background:#f59e0b"></div></div>
+                        <span style="font-size:.75rem">۸۱٪</span>
+                      </div>
+                    </td>
+                    <td><span class="status-pill st-danger">ضعیف</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="کارنامه" onclick="openReportTab()"><i class="bi bi-file-earmark-bar-graph"></i></button>
+                      <button class="btn-icon-ghost" title="ویرایش" onclick="toast('در نسخهٔ نمایشی، ویرایش فعال نیست','bi-info-circle')"><i class="bi bi-pencil"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-id="۱۰۴۸" data-name="محمد حسینی" data-grade="هفتم" data-cls="۲" data-gpa="14.1" data-attend="74" data-trend="-1.5" data-status="نیازمند تلاش">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-violet">مح</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">محمد حسینی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۸</div></div>
+                    </div></td>
+                    <td>پایهٔ هفتم</td>
+                    <td>کلاس ۲</td>
+                    <td><b>۱۴٫۱۰</b> <span class="chip down"><i class="bi bi-arrow-down-short"></i>۱٫۵</span></td>
+                    <td>
+                      <div class="d-flex align-items-center gap-2">
+                        <div style="width:64px;height:6px;background:#edf3f2;border-radius:99px"><div class="fill" style="width:74%;height:100%;border-radius:99px;background:#e11d48"></div></div>
+                        <span style="font-size:.75rem">۷۴٪</span>
+                      </div>
+                    </td>
+                    <td><span class="status-pill st-warn">نیازمند تلاش</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="کارنامه" onclick="openReportTab()"><i class="bi bi-file-earmark-bar-graph"></i></button>
+                      <button class="btn-icon-ghost" title="ویرایش" onclick="toast('در نسخهٔ نمایشی، ویرایش فعال نیست','bi-info-circle')"><i class="bi bi-pencil"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-id="۱۰۵۲" data-name="فاطمه کریمی" data-grade="سوم" data-cls="۱" data-gpa="19.6" data-attend="99" data-trend="0.3" data-status="عالی">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-amber">فک</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">فاطمه کریمی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۵۲</div></div>
+                    </div></td>
+                    <td>پایهٔ سوم</td>
+                    <td>کلاس ۱</td>
+                    <td><b>۱۹٫۶۰</b> <span class="chip up"><i class="bi bi-arrow-up-short"></i>۰٫۳</span></td>
+                    <td>
+                      <div class="d-flex align-items-center gap-2">
+                        <div style="width:64px;height:6px;background:#edf3f2;border-radius:99px"><div class="fill" style="width:99%;height:100%;border-radius:99px;background:#10b981"></div></div>
+                        <span style="font-size:.75rem">۹۹٪</span>
+                      </div>
+                    </td>
+                    <td><span class="status-pill st-excellent">عالی</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="کارنامه" onclick="openReportTab()"><i class="bi bi-file-earmark-bar-graph"></i></button>
+                      <button class="btn-icon-ghost" title="ویرایش" onclick="toast('در نسخهٔ نمایشی، ویرایش فعال نیست','bi-info-circle')"><i class="bi bi-pencil"></i></button>
+                    </td>
+                  </tr>
+                  <tr data-id="۱۰۵۵" data-name="نگار احمدی" data-grade="اول" data-cls="۲" data-gpa="18.1" data-attend="97" data-trend="0.7" data-status="خوب">
+                    <td><div class="d-flex align-items-center gap-2">
+                      <span class="avatar sm av-emerald">نا</span>
+                      <div><div class="fw-bold" style="font-size:.85rem">نگار احمدی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۵۵</div></div>
+                    </div></td>
+                    <td>پایهٔ اول</td>
+                    <td>کلاس ۲</td>
+                    <td><b>۱۸٫۱۰</b> <span class="chip up"><i class="bi bi-arrow-up-short"></i>۰٫۷</span></td>
+                    <td>
+                      <div class="d-flex align-items-center gap-2">
+                        <div style="width:64px;height:6px;background:#edf3f2;border-radius:99px"><div class="fill" style="width:97%;height:100%;border-radius:99px;background:#10b981"></div></div>
+                        <span style="font-size:.75rem">۹۷٪</span>
+                      </div>
+                    </td>
+                    <td><span class="status-pill st-good">خوب</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="کارنامه" onclick="openReportTab()"><i class="bi bi-file-earmark-bar-graph"></i></button>
+                      <button class="btn-icon-ghost" title="ویرایش" onclick="toast('در نسخهٔ نمایشی، ویرایش فعال نیست','bi-info-circle')"><i class="bi bi-pencil"></i></button>
+                    </td>
+                  </tr>
+                  <tr id="studentsEmpty" class="d-none"><td colspan="7"><div class="empty-hint">دانش‌آموزی با این مشخصات یافت نشد</div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- تب ۲: کارنامه و گزارش (نمونهٔ ثابت — داده‌ها مستقیم در HTML) -->
+        <div id="paneReport" class="d-none">
+          <div class="d-flex justify-content-end gap-2 mb-3 no-print">
+            <button class="btn btn-ghost" id="btnPrint"><i class="bi bi-printer me-1"></i> چاپ کارنامه</button>
+          </div>
+
+          <div class="card-soft mb-3">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-3 flex-wrap">
+                <span class="avatar lg av-teal">عر</span>
+                <div class="flex-grow-1">
+                  <div class="fw-bold fs-5">علی رضایی</div>
+                  <div class="text-muted" style="font-size:.78rem">پایهٔ نهم • کلاس ۱ • سال تحصیلی ۱۴۰۳–۱۴۰۴</div>
+                </div>
+                <div class="d-flex gap-4 text-center flex-wrap">
+                  <div><div class="stat-num text-success">۱۸٫۴۰</div><div class="stat-label">معدل کل</div></div>
+                  <div><div class="stat-num" style="color:var(--brand-600)">۳</div><div class="stat-label">رتبه در مدرسه</div></div>
+                  <div><div class="stat-num" style="color:var(--amber)">۹۶٪</div><div class="stat-label">درصد حضور</div></div>
+                  <div><div class="stat-num" style="color:var(--rose)">۱۴</div><div class="stat-label">روز غیبت</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="d-flex flex-wrap gap-2">
+                <span class="chip up"><i class="bi bi-graph-up-arrow"></i> روند صعودی — ۱٫۲ نمره</span>
+                <span class="chip flat"><i class="bi bi-award"></i> قوی‌ترین درس: مطالعات اجتماعی</span>
+                <span class="chip down"><i class="bi bi-exclamation-triangle"></i> نیازمند تقویت: علوم تجربی</span>
+                <span class="chip flat"><i class="bi bi-person-check"></i> معلم راهنما: پویا صالحی</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-lg-7">
+              <div class="card-soft h-100">
+                <div class="card-head"><h6><i class="bi bi-graph-up text-success me-1"></i> روند معدل ماهانه</h6><span class="hint">در مقایسه با میانگین کلاس</span></div>
+                <div class="card-body">
+                  <div class="chart-wrap"><svg viewBox="0 0 640 250" role="img" aria-label="نمودار خطی"><linearGradient id="grad-r-0" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d9488" stop-opacity="0.28"></stop><stop offset="100%" stop-color="#0d9488" stop-opacity="0"></stop></linearGradient><line x1="14" x2="596" y1="216" y2="216" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="220" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۱۰</text><line x1="14" x2="596" y1="166" y2="166" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="170" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۱۳</text><line x1="14" x2="596" y1="116" y2="116" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="120" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۱۵</text><line x1="14" x2="596" y1="66" y2="66" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="70" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۱۸</text><line x1="14" x2="596" y1="16" y2="16" stroke="#e6efee" stroke-dasharray="3 4"></line><text x="604" y="20" font-size="10" fill="#9ab3ae" text-anchor="start" font-weight="500">۲۰</text><text x="596" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">مهر</text><text x="450.5" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">آبان</text><text x="305" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">آذر</text><text x="159.5" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">دی</text><text x="14" y="240" font-size="10.5" fill="#7d948f" text-anchor="middle" font-weight="500">بهمن</text><path d="M 596 60 C 571.75 58.333333333333336, 499 50.33333333333333, 450.5 50 C 402 49.66666666666667, 353.5 63.66666666666669, 305 58.00000000000003 C 256.5 52.333333333333364, 208 19.333333333333332, 159.5 16 C 111 12.666666666666666, 38.25 34.33333333333336, 14 38.00000000000003 L 14 216 L 596 216 Z" fill="url(#grad-r-0)"></path><path d="M 596 60 C 571.75 58.333333333333336, 499 50.33333333333333, 450.5 50 C 402 49.66666666666667, 353.5 63.66666666666669, 305 58.00000000000003 C 256.5 52.333333333333364, 208 19.333333333333332, 159.5 16 C 111 12.666666666666666, 38.25 34.33333333333336, 14 38.00000000000003" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="596" cy="60" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="596" y="50" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۱۸</text><circle cx="450.5" cy="50" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="450.5" y="40" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۱۸</text><circle cx="305" cy="58.00000000000003" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="305" y="48.00000000000003" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۱۸</text><circle cx="159.5" cy="16" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="159.5" y="6" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۲۰</text><circle cx="14" cy="38.00000000000003" r="4" fill="#fff" stroke="#0d9488" stroke-width="2.5"></circle><text x="14" y="28.00000000000003" font-size="10" fill="#0d9488" text-anchor="middle" font-weight="700">۱۹</text><path d="M 596 88.00000000000001 C 571.75 88.00000000000001, 499 88.00000000000001, 450.5 88.00000000000001 C 402 88.00000000000001, 353.5 88.00000000000001, 305 88.00000000000001 C 256.5 88.00000000000001, 208 88.00000000000001, 159.5 88.00000000000001 C 111 88.00000000000001, 38.25 88.00000000000001, 14 88.00000000000001" fill="none" stroke="#cbd5d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"></path></svg></div>
+                  <div class="legend mt-3">
+                    <span class="li"><span class="swatch" style="background:#0d9488"></span>این دانش‌آموز</span>
+                    <span class="li"><span class="swatch" style="background:#cbd5d3"></span>میانگین کلاس</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-soft h-100">
+                <div class="card-head"><h6><i class="bi bi-calendar2-check text-success me-1"></i> خلاصهٔ حضور و غیاب سال</h6></div>
+                <div class="card-body d-flex flex-column align-items-center gap-3">
+                  <div class="chart-wrap" style="max-width:220px"><svg viewBox="0 0 210 210" role="img" aria-label="نمودار دونات"><circle cx="105" cy="105" r="78" fill="none" stroke="#edf3f2" stroke-width="24"></circle><circle cx="105" cy="105" r="78" fill="none" stroke="#10b981" stroke-width="24" stroke-dasharray="425.8273972150067 490.0884539600077" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 105 105)"></circle><circle cx="105" cy="105" r="78" fill="none" stroke="#e11d48" stroke-width="24" stroke-dasharray="27.630528372500482 490.0884539600077" stroke-dashoffset="-428.8273972150067" stroke-linecap="round" transform="rotate(-90 105 105)"></circle><circle cx="105" cy="105" r="78" fill="none" stroke="#f59e0b" stroke-width="24" stroke-dasharray="16.1440802328128 490.0884539600077" stroke-dashoffset="-459.45792558750725" stroke-linecap="round" transform="rotate(-90 105 105)"></circle><circle cx="105" cy="105" r="78" fill="none" stroke="#94a3b8" stroke-width="24" stroke-dasharray="8.486448139687681 490.0884539600077" stroke-dashoffset="-478.60200582032" stroke-linecap="round" transform="rotate(-90 105 105)"></circle><text x="105" y="103" font-size="21" fill="#12332d" text-anchor="middle" font-weight="800" class="donut-center">۹۰٪</text><text x="105" y="123" font-size="10.5" fill="#8aa39e" text-anchor="middle" font-weight="500">حضور سال جاری</text></svg></div>
+                  <div class="legend justify-content-center">
+                    <span class="li"><span class="swatch" style="background:#10b981"></span>حاضر: ۱۱۲ روز</span>
+                    <span class="li"><span class="swatch" style="background:#e11d48"></span>غایب: ۸ روز</span>
+                    <span class="li"><span class="swatch" style="background:#f59e0b"></span>تأخیر: ۵ روز</span>
+                    <span class="li"><span class="swatch" style="background:#94a3b8"></span>مجوز: ۳ روز</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-soft mb-3">
+            <div class="card-head"><h6><i class="bi bi-bar-chart text-success me-1"></i> مقایسهٔ نمرات دروس</h6><span class="hint">نمرهٔ نهایی از ۲۰</span></div>
+            <div class="card-body">
+              <div class="h-bar">
+                <div class="h-top"><b>ریاضی</b><span style="color:#047857">۱۷٫۷۵</span></div>
+                <div class="track"><div class="fill" style="width:88.75%;background:linear-gradient(90deg,#34d399,#059669)"></div></div>
+              </div>
+              <div class="h-bar">
+                <div class="h-top"><b>علوم تجربی</b><span style="color:#b45309">۱۶٫۰۰</span></div>
+                <div class="track"><div class="fill" style="width:80%;background:linear-gradient(90deg,#2dd4bf,#0f766e)"></div></div>
+              </div>
+              <div class="h-bar">
+                <div class="h-top"><b>فارسی و نگارش</b><span style="color:#b45309">۱۶٫۰۰</span></div>
+                <div class="track"><div class="fill" style="width:80%;background:linear-gradient(90deg,#2dd4bf,#0f766e)"></div></div>
+              </div>
+              <div class="h-bar">
+                <div class="h-top"><b>زبان انگلیسی</b><span style="color:#b45309">۱۶٫۵۰</span></div>
+                <div class="track"><div class="fill" style="width:82.5%;background:linear-gradient(90deg,#2dd4bf,#0f766e)"></div></div>
+              </div>
+              <div class="h-bar">
+                <div class="h-top"><b>مطالعات اجتماعی</b><span style="color:#047857">۱۸٫۵۰</span></div>
+                <div class="track"><div class="fill" style="width:92.5%;background:linear-gradient(90deg,#34d399,#059669)"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-soft">
+            <div class="card-head"><h6><i class="bi bi-file-earmark-bar-graph text-success me-1"></i> کارنامهٔ تفصیلی</h6><span class="hint">مستمر و میان‌ترم از ۲۰ — نهایی: وزنی</span></div>
+            <div class="table-responsive">
+              <table class="table table-clean align-middle">
+                <thead><tr><th>درس</th><th>مستمر</th><th>میان‌ترم</th><th>پایان‌ترم</th><th>نمرهٔ نهایی</th><th>وضعیت</th><th>دبیر / معلم</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td class="fw-bold">ریاضی</td>
+                    <td>۱۸٫۷۵</td><td>۱۷٫۵۰</td><td>۱۷٫۵۰</td>
+                    <td><b class="text-success">۱۷٫۷۵</b></td>
+                    <td><span class="status-pill st-excellent">عالی</span></td>
+                    <td class="text-muted" style="font-size:.75rem">علی کریمی</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">علوم تجربی</td>
+                    <td>۱۸٫۲۵</td><td>۱۵٫۷۵</td><td>۱۵٫۰۰</td>
+                    <td><b class="text-success">۱۶٫۰۰</b></td>
+                    <td><span class="status-pill st-good">خوب</span></td>
+                    <td class="text-muted" style="font-size:.75rem">حسین موسوی</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">فارسی و نگارش</td>
+                    <td>۱۷٫۰۰</td><td>۱۶٫۰۰</td><td>۱۵٫۷۵</td>
+                    <td><b class="text-success">۱۶٫۰۰</b></td>
+                    <td><span class="status-pill st-good">خوب</span></td>
+                    <td class="text-muted" style="font-size:.75rem">مریم احمدی</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">زبان انگلیسی</td>
+                    <td>۱۸٫۲۵</td><td>۱۷٫۰۰</td><td>۱۵٫۲۵</td>
+                    <td><b class="text-success">۱۶٫۵۰</b></td>
+                    <td><span class="status-pill st-good">خوب</span></td>
+                    <td class="text-muted" style="font-size:.75rem">سارا رحیمی</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">مطالعات اجتماعی</td>
+                    <td>۲۰٫۰۰</td><td>۱۹٫۷۵</td><td>۱۷٫۲۵</td>
+                    <td><b class="text-success">۱۸٫۵۰</b></td>
+                    <td><span class="status-pill st-excellent">عالی</span></td>
+                    <td class="text-muted" style="font-size:.75rem">کیوان رستمی</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- تب ۳: معلمان و کلاس‌ها (داده‌های تستی مستقیم در HTML) -->
+        <div id="paneTeachers" class="d-none">
+          <div class="d-flex justify-content-end gap-2 mb-3 flex-wrap">
+            <button class="btn btn-brand btn-sm-brand" id="btnAddClass"><i class="bi bi-easel2 me-1"></i> افزودن کلاس</button>
+            <button class="btn btn-brand btn-sm-brand" id="btnAddTeacher"><i class="bi bi-person-plus me-1"></i> افزودن معلم</button>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-md-6 col-xl-4">
+              <div class="card-soft teacher-card">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                  <span class="avatar av-violet">نم</span>
+                  <div><div class="fw-bold" style="font-size:.9rem">نرگس محمدی</div><div class="text-muted" style="font-size:.72rem">معلم پایهٔ سوم (تمام دروس)</div></div>
+                </div>
+                <div class="mb-2"><span class="subject-tag">همهٔ دروس پایهٔ سوم</span></div>
+                <div class="d-flex justify-content-between text-muted" style="font-size:.74rem">
+                  <span><i class="bi bi-easel2"></i> سوم — کلاس ۱ و ۲</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2 pt-2" style="border-top:1px dashed var(--line)">
+                  <span class="text-muted" style="font-size:.74rem">تعداد دانش‌آموز</span><b>۴۶</b>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-4">
+              <div class="card-soft teacher-card">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                  <span class="avatar av-teal">اک</span>
+                  <div><div class="fw-bold" style="font-size:.9rem">علی کریمی</div><div class="text-muted" style="font-size:.72rem">دبیر ریاضی</div></div>
+                </div>
+                <div class="mb-2"><span class="subject-tag">ریاضی</span></div>
+                <div class="d-flex justify-content-between text-muted" style="font-size:.74rem">
+                  <span><i class="bi bi-easel2"></i> هفتم، هشتم، نهم</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2 pt-2" style="border-top:1px dashed var(--line)">
+                  <span class="text-muted" style="font-size:.74rem">تعداد دانش‌آموز</span><b>۹۲</b>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-4">
+              <div class="card-soft teacher-card">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                  <span class="avatar av-amber">ما</span>
+                  <div><div class="fw-bold" style="font-size:.9rem">مریم احمدی</div><div class="text-muted" style="font-size:.72rem">دبیر فارسی و نگارش</div></div>
+                </div>
+                <div class="mb-2"><span class="subject-tag">فارسی و نگارش</span><span class="subject-tag">فارسی</span></div>
+                <div class="d-flex justify-content-between text-muted" style="font-size:.74rem">
+                  <span><i class="bi bi-easel2"></i> هفتم، هشتم، نهم</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2 pt-2" style="border-top:1px dashed var(--line)">
+                  <span class="text-muted" style="font-size:.74rem">تعداد دانش‌آموز</span><b>۹۲</b>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-4">
+              <div class="card-soft teacher-card">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                  <span class="avatar av-emerald">حم</span>
+                  <div><div class="fw-bold" style="font-size:.9rem">حسین موسوی</div><div class="text-muted" style="font-size:.72rem">دبیر علوم تجربی</div></div>
+                </div>
+                <div class="mb-2"><span class="subject-tag">علوم تجربی</span><span class="subject-tag">علوم</span></div>
+                <div class="d-flex justify-content-between text-muted" style="font-size:.74rem">
+                  <span><i class="bi bi-easel2"></i> هفتم، هشتم، نهم</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2 pt-2" style="border-top:1px dashed var(--line)">
+                  <span class="text-muted" style="font-size:.74rem">تعداد دانش‌آموز</span><b>۸۸</b>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-4">
+              <div class="card-soft teacher-card">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                  <span class="avatar av-rose">صر</span>
+                  <div><div class="fw-bold" style="font-size:.9rem">سارا رحیمی</div><div class="text-muted" style="font-size:.72rem">دبیر زبان انگلیسی</div></div>
+                </div>
+                <div class="mb-2"><span class="subject-tag">زبان انگلیسی</span></div>
+                <div class="d-flex justify-content-between text-muted" style="font-size:.74rem">
+                  <span><i class="bi bi-easel2"></i> دوم، سوم، هفتم، هشتم، نهم</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2 pt-2" style="border-top:1px dashed var(--line)">
+                  <span class="text-muted" style="font-size:.74rem">تعداد دانش‌آموز</span><b>۱۱۸</b>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-soft">
+            <div class="card-head"><h6><i class="bi bi-easel text-success me-1"></i> کلاس‌های فعال مدرسه</h6><span class="hint" id="clsCountHint">۵ کلاس فعال — از ۶ پایه</span></div>
+            <div class="table-responsive">
+              <table class="table table-clean align-middle">
+                <thead><tr><th>پایه</th><th>کلاس</th><th>معلم راهنما</th><th>تعداد دانش‌آموز</th><th>میانگین معدل</th><th>سطح</th></tr></thead>
+                <tbody id="classesTbody">
+                  <tr data-grade="اول" data-cls="۲" data-avg="17.6">
+                    <td class="fw-bold">پایهٔ اول</td>
+                    <td>کلاس ۲</td>
+                    <td>سمانه نوروزی</td>
+                    <td>۲۶ نفر</td>
+                    <td><b class="text-success">۱۷٫۶</b></td>
+                    <td>
+                      <div style="width:90px;height:6px;background:#edf3f2;border-radius:99px">
+                        <div class="fill" style="width:88%;height:100%;border-radius:99px;background:linear-gradient(90deg,#2dd4bf,#0f766e)"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-grade="سوم" data-cls="۱" data-avg="18.4">
+                    <td class="fw-bold">پایهٔ سوم</td>
+                    <td>کلاس ۱</td>
+                    <td>نرگس محمدی</td>
+                    <td>۲۳ نفر</td>
+                    <td><b class="text-success">۱۸٫۴</b></td>
+                    <td>
+                      <div style="width:90px;height:6px;background:#edf3f2;border-radius:99px">
+                        <div class="fill" style="width:92%;height:100%;border-radius:99px;background:linear-gradient(90deg,#2dd4bf,#0f766e)"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-grade="هفتم" data-cls="۲" data-avg="14.8">
+                    <td class="fw-bold">پایهٔ هفتم</td>
+                    <td>کلاس ۲</td>
+                    <td>مینا اکبری</td>
+                    <td>۲۷ نفر</td>
+                    <td><b class="text-success">۱۴٫۸</b></td>
+                    <td>
+                      <div style="width:90px;height:6px;background:#edf3f2;border-radius:99px">
+                        <div class="fill" style="width:74%;height:100%;border-radius:99px;background:linear-gradient(90deg,#2dd4bf,#0f766e)"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-grade="نهم" data-cls="۱" data-avg="17.5">
+                    <td class="fw-bold">پایهٔ نهم</td>
+                    <td>کلاس ۱</td>
+                    <td>پویا صالحی</td>
+                    <td>۲۵ نفر</td>
+                    <td><b class="text-success">۱۷٫۵</b></td>
+                    <td>
+                      <div style="width:90px;height:6px;background:#edf3f2;border-radius:99px">
+                        <div class="fill" style="width:87.5%;height:100%;border-radius:99px;background:linear-gradient(90deg,#2dd4bf,#0f766e)"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-grade="نهم" data-cls="۲" data-avg="15.3">
+                    <td class="fw-bold">پایهٔ نهم</td>
+                    <td>کلاس ۲</td>
+                    <td>پویا صالحی</td>
+                    <td>۲۴ نفر</td>
+                    <td><b class="text-success">۱۵٫۳</b></td>
+                    <td>
+                      <div style="width:90px;height:6px;background:#edf3f2;border-radius:99px">
+                        <div class="fill" style="width:76.5%;height:100%;border-radius:99px;background:linear-gradient(90deg,#2dd4bf,#0f766e)"></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ نمرات و امتحانات (داده‌های تستی مستقیم در HTML) ═══════════ -->
       <section id="view-grades" class="view d-none">
         <div class="page-head">
           <div>
@@ -391,11 +1178,15 @@
               <div class="row g-2 align-items-end">
                 <div class="col-md-6">
                   <label class="form-label">انتخاب امتحان</label>
-                  <select class="form-select" id="gradeExam"></select>
+                  <select class="form-select" id="gradeExam">
+                    <option data-info="ریاضی • پایهٔ نهم • میان‌ترم • حداکثر نمره: ۲۰">امتحان میان‌ترم ریاضی</option>
+                    <option data-info="علوم تجربی • پایهٔ نهم • مستمر • حداکثر نمره: ۵">آزمون مستمر علوم تجربی</option>
+                    <option data-info="زبان انگلیسی • پایهٔ هشتم • مستمر • حداکثر نمره: ۵">آزمون هفتگی زبان انگلیسی</option>
+                  </select>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">مشخصات</label>
-                  <div class="form-control bg-light" id="gradeExamInfo" style="border:1px dashed var(--line)">—</div>
+                  <div class="form-control bg-light" id="gradeExamInfo" style="border:1px dashed var(--line)">ریاضی • پایهٔ نهم • میان‌ترم • حداکثر نمره: ۲۰</div>
                 </div>
               </div>
             </div>
@@ -410,7 +1201,48 @@
                 <thead class="position-sticky top-0 bg-white" style="z-index:5">
                   <tr><th>#</th><th>دانش‌آموز</th><th class="d-none d-md-table-cell">کلاس</th><th>نمره</th><th>توضیحات</th><th>وضعیت</th></tr>
                 </thead>
-                <tbody id="gradeTbody"></tbody>
+                <tbody id="gradeTbody">
+                  <tr>
+                    <td>۱</td>
+                    <td><div class="d-flex align-items-center gap-2"><span class="avatar sm av-teal">عر</span><div class="fw-bold" style="font-size:.85rem">علی رضایی</div></div></td>
+                    <td class="text-muted d-none d-md-table-cell" style="font-size:.78rem">کلاس ۱</td>
+                    <td><input type="number" class="form-control form-control-sm text-center" style="max-width:90px" min="0" max="20" step="0.25" value="۱۹٫۷۵" dir="ltr"></td>
+                    <td><input type="text" class="form-control form-control-sm input-note" placeholder="توضیح دلخواه..."></td>
+                    <td><span class="status-pill st-excellent">معتبر</span></td>
+                  </tr>
+                  <tr>
+                    <td>۲</td>
+                    <td><div class="d-flex align-items-center gap-2"><span class="avatar sm av-emerald">سم</span><div class="fw-bold" style="font-size:.85rem">سارا موسوی</div></div></td>
+                    <td class="text-muted d-none d-md-table-cell" style="font-size:.78rem">کلاس ۱</td>
+                    <td><input type="number" class="form-control form-control-sm text-center" style="max-width:90px" min="0" max="20" step="0.25" value="۱۷" dir="ltr"></td>
+                    <td><input type="text" class="form-control form-control-sm input-note" placeholder="توضیح دلخواه..."></td>
+                    <td><span class="status-pill st-excellent">معتبر</span></td>
+                  </tr>
+                  <tr>
+                    <td>۳</td>
+                    <td><div class="d-flex align-items-center gap-2"><span class="avatar sm av-amber">مع</span><div class="fw-bold" style="font-size:.85rem">مریم عباسی</div></div></td>
+                    <td class="text-muted d-none d-md-table-cell" style="font-size:.78rem">کلاس ۱</td>
+                    <td><input type="number" class="form-control form-control-sm text-center" style="max-width:90px" min="0" max="20" step="0.25" value="۱۹٫۷۵" dir="ltr"></td>
+                    <td><input type="text" class="form-control form-control-sm input-note" placeholder="توضیح دلخواه..."></td>
+                    <td><span class="status-pill st-excellent">معتبر</span></td>
+                  </tr>
+                  <tr>
+                    <td>۴</td>
+                    <td><div class="d-flex align-items-center gap-2"><span class="avatar sm av-violet">آک</span><div class="fw-bold" style="font-size:.85rem">آرش کاظمی</div></div></td>
+                    <td class="text-muted d-none d-md-table-cell" style="font-size:.78rem">کلاس ۱</td>
+                    <td><input type="number" class="form-control form-control-sm text-center" style="max-width:90px" min="0" max="20" step="0.25" value="۱۷٫۵" dir="ltr"></td>
+                    <td><input type="text" class="form-control form-control-sm input-note" placeholder="توضیح دلخواه..."></td>
+                    <td><span class="status-pill st-excellent">معتبر</span></td>
+                  </tr>
+                  <tr>
+                    <td>۵</td>
+                    <td><div class="d-flex align-items-center gap-2"><span class="avatar sm av-rose">اق</span><div class="fw-bold" style="font-size:.85rem">امیر قاسمی</div></div></td>
+                    <td class="text-muted d-none d-md-table-cell" style="font-size:.78rem">کلاس ۲</td>
+                    <td><input type="number" class="form-control form-control-sm text-center" style="max-width:90px" min="0" max="20" step="0.25" value="۱۱٫۵" dir="ltr"></td>
+                    <td><input type="text" class="form-control form-control-sm input-note" placeholder="توضیح دلخواه..."></td>
+                    <td><span class="status-pill st-excellent">معتبر</span></td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
@@ -426,91 +1258,162 @@
             <div class="table-responsive">
               <table class="table table-clean align-middle">
                 <thead><tr><th>عنوان امتحان</th><th>درس</th><th>پایه</th><th>تاریخ</th><th>نوع</th><th>نمرهٔ کل</th><th>وضعیت</th><th>عملیات</th></tr></thead>
-                <tbody id="examsTbody"></tbody>
+                <tbody id="examsTbody">
+                  <tr>
+                    <td class="fw-bold">امتحان میان‌ترم ریاضی</td>
+                    <td>ریاضی</td>
+                    <td>پایهٔ نهم</td>
+                    <td>۱۴۰۳/۰۹/۱۸</td>
+                    <td><span class="status-pill st-warn">میان‌ترم</span></td>
+                    <td>۲۰</td>
+                    <td><span class="status-pill st-excellent">برگزار شده</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="مشاهدهٔ نتایج" onclick="toast('نتایج این امتحان در نسخهٔ نمایشی موجود نیست','bi-info-circle')"><i class="bi bi-clipboard-data"></i></button>
+                      <button class="btn-icon-ghost danger" title="حذف" onclick="toast('در نسخهٔ نمایشی، حذف فعال نیست','bi-info-circle')"><i class="bi bi-trash"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">آزمون مستمر علوم تجربی</td>
+                    <td>علوم تجربی</td>
+                    <td>پایهٔ نهم</td>
+                    <td>۱۴۰۳/۰۹/۱۰</td>
+                    <td><span class="status-pill st-info">مستمر</span></td>
+                    <td>۵</td>
+                    <td><span class="status-pill st-excellent">برگزار شده</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="مشاهدهٔ نتایج" onclick="toast('نتایج این امتحان در نسخهٔ نمایشی موجود نیست','bi-info-circle')"><i class="bi bi-clipboard-data"></i></button>
+                      <button class="btn-icon-ghost danger" title="حذف" onclick="toast('در نسخهٔ نمایشی، حذف فعال نیست','bi-info-circle')"><i class="bi bi-trash"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">آزمون هفتگی زبان انگلیسی</td>
+                    <td>زبان انگلیسی</td>
+                    <td>پایهٔ هشتم</td>
+                    <td>۱۴۰۳/۰۹/۱۵</td>
+                    <td><span class="status-pill st-info">مستمر</span></td>
+                    <td>۵</td>
+                    <td><span class="status-pill st-excellent">برگزار شده</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="مشاهدهٔ نتایج" onclick="toast('نتایج این امتحان در نسخهٔ نمایشی موجود نیست','bi-info-circle')"><i class="bi bi-clipboard-data"></i></button>
+                      <button class="btn-icon-ghost danger" title="حذف" onclick="toast('در نسخهٔ نمایشی، حذف فعال نیست','bi-info-circle')"><i class="bi bi-trash"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">امتحان هم‌گامی مطالعات اجتماعی</td>
+                    <td>مطالعات اجتماعی</td>
+                    <td>پایهٔ نهم</td>
+                    <td>۱۴۰۳/۱۰/۰۲</td>
+                    <td><span class="status-pill st-warn">میان‌ترم</span></td>
+                    <td>۱۰</td>
+                    <td><span class="status-pill st-info">پیش‌رو</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="مشاهدهٔ نتایج" onclick="toast('نتایج این امتحان در نسخهٔ نمایشی موجود نیست','bi-info-circle')"><i class="bi bi-clipboard-data"></i></button>
+                      <button class="btn-icon-ghost danger" title="حذف" onclick="toast('در نسخهٔ نمایشی، حذف فعال نیست','bi-info-circle')"><i class="bi bi-trash"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">امتحان پایانی فارسی</td>
+                    <td>فارسی</td>
+                    <td>پایهٔ سوم</td>
+                    <td>۱۴۰۳/۱۰/۰۵</td>
+                    <td><span class="status-pill st-danger">پایانی</span></td>
+                    <td>۲۰</td>
+                    <td><span class="status-pill st-info">پیش‌رو</span></td>
+                    <td class="text-nowrap">
+                      <button class="btn-icon-ghost" title="مشاهدهٔ نتایج" onclick="toast('نتایج این امتحان در نسخهٔ نمایشی موجود نیست','bi-info-circle')"><i class="bi bi-clipboard-data"></i></button>
+                      <button class="btn-icon-ghost danger" title="حذف" onclick="toast('در نسخهٔ نمایشی، حذف فعال نیست','bi-info-circle')"><i class="bi bi-trash"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ═══════════ گزارش‌ها ═══════════ -->
-      <section id="view-reports" class="view d-none">
+      <!-- ═══════════ پیام‌های والدین (۵ ردیف دادهٔ تستی مستقیم در HTML) ═══════════ -->
+      <section id="view-messages" class="view d-none">
         <div class="page-head">
           <div>
-            <h2>گزارش‌ها و نمودارها</h2>
-            <p>کارنامه، روند تحصیلی و تحلیل وضعیت هر دانش‌آموز</p>
+            <h2>پیام به والدین</h2>
+            <p>پیامک‌های اطلاع‌رسانی ارسال‌شده به اولیای دانش‌آموزان و ارسال پیام جدید</p>
           </div>
-          <div class="d-flex gap-2 no-print">
-            <button class="btn btn-ghost" id="btnPrint"><i class="bi bi-printer me-1"></i> چاپ کارنامه</button>
-            <button class="btn btn-brand" id="btnReport"><i class="bi bi-arrow-repeat me-1"></i> نمایش گزارش</button>
-          </div>
-        </div>
-
-        <div class="card-soft mb-3 no-print">
-          <div class="card-body py-3">
-            <div class="row g-2 align-items-end">
-              <div class="col-md-5">
-                <label class="form-label">انتخاب دانش‌آموز</label>
-                <select class="form-select" id="reportStudent"></select>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">بازهٔ گزارش</label>
-                <select class="form-select">
-                  <option>سال تحصیلی جاری (۱۴۰۵–۱۴۰۶)</option>
-                  <option>ترم اول</option>
-                  <option>ترم دوم</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-soft mb-3">
-          <div class="card-body" id="reportHead"></div>
-          <div class="card-body pt-0" id="reportInsight"></div>
+          <button class="btn btn-brand" id="btnNewMsg"><i class="bi bi-plus-lg me-1"></i> ارسال پیام جدید</button>
         </div>
 
         <div class="row g-3 mb-3">
-          <div class="col-lg-7">
-            <div class="card-soft h-100">
-              <div class="card-head"><h6><i class="bi bi-graph-up text-success me-1"></i> روند معدل ماهانه</h6><span class="hint">در مقایسه با میانگین کلاس</span></div>
-              <div class="card-body">
-                <div class="chart-wrap" id="chartTrend"></div>
-                <div class="legend mt-3">
-                  <span class="li"><span class="swatch" style="background:#0d9488"></span>این دانش‌آموز</span>
-                  <span class="li"><span class="swatch" style="background:#cbd5d3"></span>میانگین کلاس</span>
-                </div>
-              </div>
+          <div class="col-12 col-md-4">
+            <div class="card-soft stat-card d-flex align-items-center gap-3">
+              <span class="stat-icon bg-soft-brand"><i class="bi bi-send-fill"></i></span>
+              <div><div class="stat-num">۳</div><div class="stat-label">ارسال امروز</div></div>
             </div>
           </div>
-          <div class="col-lg-5">
-            <div class="card-soft h-100">
-              <div class="card-head"><h6><i class="bi bi-calendar2-check text-success me-1"></i> خلاصهٔ حضور و غیاب سال</h6></div>
-              <div class="card-body d-flex flex-column align-items-center gap-3">
-                <div class="chart-wrap" id="chartAtt" style="max-width:220px"></div>
-                <div class="legend justify-content-center" id="attLegend"></div>
-              </div>
+          <div class="col-12 col-md-4">
+            <div class="card-soft stat-card d-flex align-items-center gap-3">
+              <span class="stat-icon bg-soft-emerald"><i class="bi bi-check2-all"></i></span>
+              <div><div class="stat-num">۴</div><div class="stat-label">تحویل موفق</div></div>
             </div>
           </div>
-        </div>
-
-        <div class="card-soft mb-3">
-          <div class="card-head"><h6><i class="bi bi-bar-chart text-success me-1"></i> مقایسهٔ نمرات دروس</h6><span class="hint">نمرهٔ نهایی از ۲۰</span></div>
-          <div class="card-body" id="subjectBars"></div>
+          <div class="col-12 col-md-4">
+            <div class="card-soft stat-card d-flex align-items-center gap-3">
+              <span class="stat-icon bg-soft-amber"><i class="bi bi-hourglass-split"></i></span>
+              <div><div class="stat-num">۱</div><div class="stat-label">در انتظار ارسال</div></div>
+            </div>
+          </div>
         </div>
 
         <div class="card-soft">
-          <div class="card-head"><h6><i class="bi bi-file-earmark-bar-graph text-success me-1"></i> کارنامهٔ تفصیلی</h6><span class="hint">مستمر و میان‌ترم از ۲۰ — نهایی: وزنی</span></div>
           <div class="table-responsive">
             <table class="table table-clean align-middle">
-              <thead><tr><th>درس</th><th>مستمر</th><th>میان‌ترم</th><th>پایان‌ترم</th><th>نمرهٔ نهایی</th><th>وضعیت</th><th>دبیر / معلم</th></tr></thead>
-              <tbody id="reportTable"></tbody>
+              <thead><tr><th>زمان</th><th>دانش‌آموز</th><th>نوع پیام</th><th>متن پیام</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+              <tbody id="msgTbody">
+                <tr>
+                  <td class="text-muted text-nowrap" style="font-size:.76rem">امروز — ۰۷:۴۵</td>
+                  <td class="fw-bold">امیر قاسمی</td>
+                  <td><span class="status-pill st-danger">اطلاع‌رسانی غیبت</span></td>
+                  <td style="max-width:340px"><span class="d-inline-block text-truncate" style="max-width:330px" title="والدین محترم آقای قاسمی؛ فرزند شما امروز در مدرسه حاضر نشد. لطفاً تماس بگیرید.">والدین محترم آقای قاسمی؛ فرزند شما امروز در مدرسه حاضر نشد. لطفاً تماس بگیرید.</span></td>
+                  <td><span class="status-pill st-excellent">تحویل شد</span></td>
+                  <td><button class="btn-icon-ghost" title="مشاهدهٔ کامل" onclick="toast('نمایش کامل پیام در نسخهٔ نمایشی','bi-info-circle')"><i class="bi bi-envelope-open"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="text-muted text-nowrap" style="font-size:.76rem">امروز — ۰۷:۴۵</td>
+                  <td class="fw-bold">رضا شریفی</td>
+                  <td><span class="status-pill st-danger">اطلاع‌رسانی غیبت</span></td>
+                  <td style="max-width:340px"><span class="d-inline-block text-truncate" style="max-width:330px" title="والدین محترم آقای شریفی؛ فرزند شما امروز در مدرسه حاضر نشد. لطفاً تماس بگیرید.">والدین محترم آقای شریفی؛ فرزند شما امروز در مدرسه حاضر نشد. لطفاً تماس بگیرید.</span></td>
+                  <td><span class="status-pill st-excellent">تحویل شد</span></td>
+                  <td><button class="btn-icon-ghost" title="مشاهدهٔ کامل" onclick="toast('نمایش کامل پیام در نسخهٔ نمایشی','bi-info-circle')"><i class="bi bi-envelope-open"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="text-muted text-nowrap" style="font-size:.76rem">امروز — ۰۸:۱۰</td>
+                  <td class="fw-bold">کیان مرادی</td>
+                  <td><span class="status-pill st-warn">اطلاع‌رسانی تأخیر</span></td>
+                  <td style="max-width:340px"><span class="d-inline-block text-truncate" style="max-width:330px" title="والدین محترم آقای مرادی؛ فرزند شما با تأخیر وارد مدرسه شد.">والدین محترم آقای مرادی؛ فرزند شما با تأخیر وارد مدرسه شد.</span></td>
+                  <td><span class="status-pill st-excellent">تحویل شد</span></td>
+                  <td><button class="btn-icon-ghost" title="مشاهدهٔ کامل" onclick="toast('نمایش کامل پیام در نسخهٔ نمایشی','bi-info-circle')"><i class="bi bi-envelope-open"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="text-muted text-nowrap" style="font-size:.76rem">دیروز — ۱۴:۲۰</td>
+                  <td class="fw-bold">محمد حسینی</td>
+                  <td><span class="status-pill st-info">هشدار تحصیلی</span></td>
+                  <td style="max-width:340px"><span class="d-inline-block text-truncate" style="max-width:330px" title="والدین محترم؛ افت تحصیلی در درس ریاضی مشاهده می‌شود. خواهشمند است با مشاور مدرسه تماس بگیرید.">والدین محترم؛ افت تحصیلی در درس ریاضی مشاهده می‌شود. خواهشمند است با مشاور مدرسه تماس بگیرید.</span></td>
+                  <td><span class="status-pill st-warn">در انتظار</span></td>
+                  <td><button class="btn-icon-ghost" title="مشاهدهٔ کامل" onclick="toast('نمایش کامل پیام در نسخهٔ نمایشی','bi-info-circle')"><i class="bi bi-envelope-open"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="text-muted text-nowrap" style="font-size:.76rem">۲ روز پیش</td>
+                  <td class="fw-bold">فاطمه کریمی</td>
+                  <td><span class="status-pill st-excellent">تقدیر و تشویق</span></td>
+                  <td style="max-width:340px"><span class="d-inline-block text-truncate" style="max-width:330px" title="والدین محترم؛ تقدیر بابت نمرهٔ عالی فرزند شما در آزمون اخیر. آفرین!">والدین محترم؛ تقدیر بابت نمرهٔ عالی فرزند شما در آزمون اخیر. آفرین!</span></td>
+                  <td><span class="status-pill st-excellent">تحویل شد</span></td>
+                  <td><button class="btn-icon-ghost" title="مشاهدهٔ کامل" onclick="toast('نمایش کامل پیام در نسخهٔ نمایشی','bi-info-circle')"><i class="bi bi-envelope-open"></i></button></td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
       </section>
 
-      <!-- ═══════════ دستیار هوشمند ═══════════ -->
+      <!-- ═══════════ دستیار هوشمند (پیام خوش‌آمد و پیشنهادها مستقیم در HTML) ═══════════ -->
       <section id="view-ai" class="view d-none">
         <div class="page-head">
           <div>
@@ -528,9 +1431,23 @@
             </div>
           </div>
 
-          <div class="chat-body" id="chatBody"></div>
+          <div class="chat-body" id="chatBody">
+            <div class="msg ai">
+              <span class="avatar sm" style="background:var(--brand-soft);color:var(--brand-700)"><i class="bi bi-robot"></i></span>
+              <div>
+                <div class="who">دستیار هوشمند</div>
+                <div class="bubble">سلام! من دستیار هوشمند مدرسه هستم 🤖<br>بر اساس داده‌های همین سامانه (حضور و غیاب، نمرات و امتحانات) می‌توانم وضعیت دانش‌آموزان را تحلیل کنم. سؤالت را بپرس یا یکی از پیشنهادهای زیر را انتخاب کن.</div>
+              </div>
+            </div>
+          </div>
 
-          <div class="suggest-chips" id="sugChips"></div>
+          <div class="suggest-chips" id="sugChips">
+            <button type="button" onclick="sendChat('وضعیت علی رضایی چطور است؟')">وضعیت علی رضایی چطور است؟</button>
+            <button type="button" onclick="sendChat('وضعیت امیر قاسمی چطور است؟')">وضعیت امیر قاسمی چطور است؟</button>
+            <button type="button" onclick="sendChat('وضعیت حضور محمد حسینی چطور است؟')">وضعیت حضور محمد حسینی چطور است؟</button>
+            <button type="button" onclick="sendChat('برترین‌های مدرسه را معرفی کن')">برترین‌های مدرسه را معرفی کن</button>
+            <button type="button" onclick="sendChat('مقایسهٔ معدل علی رضایی با کلاس')">مقایسهٔ معدل علی رضایی با کلاس</button>
+          </div>
 
           <div class="chat-input">
             <input type="text" class="form-control" id="chatInput" placeholder="مثلاً: وضعیت علی رضایی چطور است؟" aria-label="پیام شما">
@@ -539,76 +1456,48 @@
         </div>
       </section>
 
-      <!-- ═══════════ پیام‌های والدین ═══════════ -->
-      <section id="view-messages" class="view d-none">
-        <div class="page-head">
-          <div>
-            <h2>پیام‌های والدین</h2>
-            <p>پیامک‌های اطلاع‌رسانی ارسال‌شده به اولیای دانش‌آموزان</p>
-          </div>
-          <button class="btn btn-brand" id="btnNewMsg"><i class="bi bi-plus-lg me-1"></i> ارسال پیام جدید</button>
-        </div>
-
-        <div class="row g-3 mb-3">
-          <div class="col-12 col-md-4">
-            <div class="card-soft stat-card d-flex align-items-center gap-3">
-              <span class="stat-icon bg-soft-brand"><i class="bi bi-send-fill"></i></span>
-              <div><div class="stat-num" id="msgToday">۰</div><div class="stat-label">ارسال امروز</div></div>
-            </div>
-          </div>
-          <div class="col-12 col-md-4">
-            <div class="card-soft stat-card d-flex align-items-center gap-3">
-              <span class="stat-icon bg-soft-emerald"><i class="bi bi-check2-all"></i></span>
-              <div><div class="stat-num" id="msgDelivered">۰</div><div class="stat-label">تحویل موفق</div></div>
-            </div>
-          </div>
-          <div class="col-12 col-md-4">
-            <div class="card-soft stat-card d-flex align-items-center gap-3">
-              <span class="stat-icon bg-soft-amber"><i class="bi bi-hourglass-split"></i></span>
-              <div><div class="stat-num" id="msgPending">۰</div><div class="stat-label">در انتظار ارسال</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-soft">
-          <div class="table-responsive">
-            <table class="table table-clean align-middle">
-              <thead><tr><th>زمان</th><th>دانش‌آموز</th><th>نوع پیام</th><th>متن پیام</th><th>وضعیت</th><th>عملیات</th></tr></thead>
-              <tbody id="msgTbody"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══════════ معلمان و کلاس‌ها ═══════════ -->
-      <section id="view-teachers" class="view d-none">
-        <div class="page-head">
-          <div>
-            <h2>معلمان و کلاس‌ها</h2>
-            <p>سازماندهی دبیران، دروس و کلاس‌های هر پایه — هر درس می‌تواند دبیر مستقل داشته باشد یا یک معلم همهٔ دروس یک پایه را ارایه دهد</p>
-          </div>
-          <button class="btn btn-brand" id="btnAddTeacher"><i class="bi bi-person-plus me-1"></i> افزودن معلم</button>
-        </div>
-
-        <div class="row g-3 mb-4" id="teacherGrid"></div>
-
-        <div class="card-soft">
-          <div class="card-head"><h6><i class="bi bi-easel text-success me-1"></i> کلاس‌های فعال مدرسه</h6><span class="hint">۹ کلاس در ۶ پایه</span></div>
-          <div class="table-responsive">
-            <table class="table table-clean align-middle">
-              <thead><tr><th>پایه</th><th>کلاس</th><th>معلم راهنما</th><th>تعداد دانش‌آموز</th><th>میانگین معدل</th><th>سطح</th></tr></thead>
-              <tbody id="classesTbody"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
     </main>
 
+    <!-- ═══════════ فوتر ═══════════ -->
+    <footer class="app-footer">
+      <span>© ۱۴۰۳ سامانه پایش هوشمند «پایش‌یار» — نسخهٔ نمایشی قالب</span>
+      <span>ساخته‌شده با <i class="bi bi-filetype-html text-success"></i> HTML · CSS · JavaScript · <i class="bi bi-bootstrap text-success"></i> Bootstrap 5</span>
+    </footer>
   </div>
 </div>
 
+<!-- ══════════════ ناوبری پایین موبایل (مثل اپلیکیشن — ۵ بخش اصلی) ══════════════ -->
+<nav class="bottom-nav d-lg-none" id="bnav" aria-label="ناوبری سریع موبایل">
+  <a href="#" class="bn-link active" data-view="dashboard"><i class="bi bi-house-door-fill"></i><span>خانه</span></a>
+  <a href="#" class="bn-link" data-view="attendance"><i class="bi bi-calendar2-check"></i><span>حضور</span></a>
+  <a href="#" class="bn-link" data-view="students"><i class="bi bi-people"></i><span>دانش‌آموزان</span></a>
+  <a href="#" class="bn-link" data-view="grades"><i class="bi bi-journal-check"></i><span>نمرات</span></a>
+  <a href="#" class="bn-link" data-view="messages"><i class="bi bi-chat-dots"></i><span>پیام‌ها</span></a>
+</nav>
+
 <!-- ═══════════════════ مودال‌ها ═══════════════════ -->
+
+<!-- خوش‌آمدگویی و راهنمای شروع (فقط بار اول) -->
+<div class="modal fade" id="welcomeModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-hand-thumbs-up-fill text-success me-1"></i> سلام! سایت ساده‌تر شد</h5>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:.82rem" class="text-muted">این سامانه حالا فقط <b>۵ بخش اصلی</b> دارد؛ همه‌چیز از «خانه» شروع می‌شود:</p>
+        <div class="row-item"><span class="avatar sm av-teal"><i class="bi bi-house-door"></i></span><div><div class="t">خانه</div><div class="s">کارت‌های بزرگِ کارهای پرتکرار — هر کاری یک کلیک</div></div></div>
+        <div class="row-item"><span class="avatar sm av-emerald"><i class="bi bi-calendar2-check"></i></span><div><div class="t">حضور و غیاب</div><div class="s">در ۳ گام ساده؛ غیبت‌ها خودکار به والدین پیامک می‌شود</div></div></div>
+        <div class="row-item"><span class="avatar sm av-amber"><i class="bi bi-people"></i></span><div><div class="t">دانش‌آموزان و کلاس‌ها</div><div class="s">فهرست، کارنامه و معلمان — در سه تب کنار هم</div></div></div>
+        <div class="row-item"><span class="avatar sm av-rose"><i class="bi bi-patch-question"></i></span><div><div class="t">راهنما</div><div class="s">هر وقت گم شدید، دکمهٔ «؟» بالای صفحه را بزنید</div></div></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="btnWelcomeLater">بعداً</button>
+        <button class="btn btn-brand" id="btnWelcomeTour"><i class="bi bi-map me-1"></i> بله، سایت را نشانم بده</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- افزودن دانش‌آموز -->
 <div class="modal fade" id="studentModal" tabindex="-1" aria-hidden="true">
@@ -624,7 +1513,10 @@
             <div class="col-md-6"><label class="form-label">نام و نام خانوادگی *</label><input class="form-control" id="stName" placeholder="مثلاً: نیلوفر اسدی"></div>
             <div class="col-6 col-md-3">
               <label class="form-label">پایه</label>
-              <select class="form-select" id="stGrade"></select>
+              <select class="form-select" id="stGrade">
+                <option>اول</option><option>دوم</option><option>سوم</option><option>چهارم</option><option>پنجم</option>
+                <option>ششم</option><option>هفتم</option><option>هشتم</option><option>نهم</option>
+              </select>
             </div>
             <div class="col-6 col-md-3">
               <label class="form-label">کلاس</label>
@@ -645,19 +1537,6 @@
   </div>
 </div>
 
-<!-- پرونده دانش‌آموز -->
-<div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"><i class="bi bi-person-vcard text-success me-1"></i> پروندهٔ دانش‌آموز</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
-      </div>
-      <div class="modal-body" id="profileBody"></div>
-    </div>
-  </div>
-</div>
-
 <!-- افزودن امتحان -->
 <div class="modal fade" id="examModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -670,8 +1549,20 @@
         <form id="examForm" onsubmit="return false">
           <div class="row g-3">
             <div class="col-12"><label class="form-label">عنوان امتحان *</label><input class="form-control" id="examTitle" placeholder="مثلاً: امتحان پایانی ریاضی نهم"></div>
-            <div class="col-md-6"><label class="form-label">درس</label><select class="form-select" id="examSubject"></select></div>
-            <div class="col-md-6"><label class="form-label">پایه</label><select class="form-select" id="examGrade"></select></div>
+            <div class="col-md-6">
+              <label class="form-label">درس</label>
+              <select class="form-select" id="examSubject">
+                <option>ریاضی</option><option>علوم تجربی</option><option>فارسی و نگارش</option><option>زبان انگلیسی</option>
+                <option>مطالعات اجتماعی</option><option>عربی</option><option>قرآن</option><option>ورزش</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">پایه</label>
+              <select class="form-select" id="examGrade">
+                <option>اول</option><option>دوم</option><option>سوم</option><option>چهارم</option><option>پنجم</option>
+                <option>ششم</option><option>هفتم</option><option>هشتم</option><option>نهم</option>
+              </select>
+            </div>
             <div class="col-md-4"><label class="form-label">تاریخ</label><input class="form-control" id="examDate" placeholder="۱۴۰۳/۱۰/۱۰"></div>
             <div class="col-md-4"><label class="form-label">نوع</label><select class="form-select" id="examKind"><option>مستمر</option><option>میان‌ترم</option><option>پایانی</option></select></div>
             <div class="col-md-4"><label class="form-label">نمرهٔ کل</label><input type="number" class="form-control" id="examMax" min="1" max="100" value="20"></div>
@@ -711,6 +1602,60 @@
   </div>
 </div>
 
+<!-- افزودن کلاس (مدیر کلاس دلخواهش را اضافه می‌کند) -->
+<div class="modal fade" id="classModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-easel2 text-success me-1"></i> افزودن کلاس جدید</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body">
+        <form id="classForm" onsubmit="return false">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">پایه *</label>
+              <select class="form-select" id="clsGrade">
+                <option>اول</option><option>دوم</option><option>سوم</option><option>چهارم</option><option>پنجم</option>
+                <option>ششم</option><option>هفتم</option><option>هشتم</option><option>نهم</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">شمارهٔ کلاس *</label>
+              <input class="form-control" id="clsNum" placeholder="مثلاً: ۳" inputmode="numeric">
+            </div>
+            <div class="col-md-8">
+              <label class="form-label">معلم راهنما</label>
+              <input class="form-control" id="clsTeacher" list="teacherNames" placeholder="نام معلم را بنویسید یا انتخاب کنید">
+              <!-- نام معلم‌های نمونه — دادهٔ تستی مستقیم در تگ‌های HTML -->
+              <datalist id="teacherNames">
+                <option value="نرگس محمدی"></option>
+                <option value="علی کریمی"></option>
+                <option value="مریم احمدی"></option>
+                <option value="حسین موسوی"></option>
+                <option value="سارا رحیمی"></option>
+              </datalist>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">تعداد دانش‌آموز</label>
+              <input type="number" class="form-control" id="clsCount" min="1" max="45" value="25">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">میانگین معدل (اختیاری)</label>
+              <input type="number" class="form-control" id="clsAvg" min="0" max="20" step="0.1" placeholder="مثلاً: 16.5">
+            </div>
+          </div>
+          <div class="text-muted mt-3" style="font-size:.72rem"><i class="bi bi-info-circle"></i> کلاس پس از ثبت، به جدول «کلاس‌های فعال مدرسه» و کارت‌های انتخاب کلاسِ حضور و غیاب اضافه می‌شود (نسخهٔ نمایشی).</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-bs-dismiss="modal">انصراف</button>
+        <button class="btn btn-brand" id="btnSaveClass"><i class="bi bi-check2 me-1"></i> ثبت کلاس</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ارسال پیام جدید -->
 <div class="modal fade" id="msgModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -723,7 +1668,10 @@
         <form id="msgForm" onsubmit="return false">
           <div class="mb-3">
             <label class="form-label">دانش‌آموز</label>
-            <select class="form-select" id="msgStudent"></select>
+            <select class="form-select" id="msgStudent">
+              <option>علی رضایی</option><option>امیر قاسمی</option><option>محمد حسینی</option>
+              <option>فاطمه کریمی</option><option>نگار احمدی</option>
+            </select>
           </div>
           <div class="mb-2">
             <label class="form-label">متن پیام</label>
@@ -736,6 +1684,23 @@
         <button class="btn btn-ghost" data-bs-dismiss="modal">انصراف</button>
         <button class="btn btn-brand" id="btnSendMsg"><i class="bi bi-send me-1"></i> ارسال</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ تور راهنمای اسپات‌لایت ═══════════════════ -->
+<div id="tourOverlay" class="d-none">
+  <div id="tourSpot"></div>
+  <div id="tourCard" role="dialog" aria-labelledby="tourTitle">
+    <div class="t-head">
+      <span class="t-badge" id="tourStepNum">گام ۱ از ۵</span>
+      <button class="t-close" id="tourSkip" aria-label="پایان راهنما"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <h6 id="tourTitle">—</h6>
+    <p id="tourDesc">—</p>
+    <div class="t-foot">
+      <button class="btn btn-ghost btn-sm-brand" id="tourPrev">قبلی</button>
+      <button class="btn btn-brand btn-sm-brand" id="tourNext">بعدی</button>
     </div>
   </div>
 </div>

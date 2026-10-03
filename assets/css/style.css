@@ -481,8 +481,168 @@ body {
 
 /* ---------- چاپ کارنامه ---------- */
 @media print {
-  .sidebar, .topbar, .app-footer, .no-print, .toast-host, .backdrop { display: none !important; }
+  .sidebar, .topbar, .app-footer, .no-print, .toast-host, .backdrop, .bottom-nav, #tourOverlay, .wiz-progress { display: none !important; }
   .content { padding: 0 !important; }
   body { background: #fff; }
   .card-soft { box-shadow: none !important; border: 1px solid #ddd; break-inside: avoid; }
 }
+
+/* ============================================================
+   ✔ بهینه‌سازی برای مدیر مدرسه — نسخهٔ ساده‌شده
+   منو با زیرنویس، کارت‌های «کارهای پرتکرار»، ویزارد ۳ گامی،
+   ناوبری پایین موبایل و تور راهنمای اسپات‌لایت
+   ============================================================ */
+
+/* ---------- آیتم‌های منو با زیرنویس توضیحی ---------- */
+.side-link { padding: .5rem .75rem; }
+.side-link .side-wrap { display: flex; flex-direction: column; line-height: 1.5; min-width: 0; flex: 1 1 auto; }
+.side-link .side-txt { font-size: .86rem; font-weight: 600; }
+.side-link .side-sub { font-size: .66rem; color: #7ea79e; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.side-link.active .side-sub { color: #93e6d5; }
+
+.side-help { padding: .6rem .8rem .2rem; }
+.btn-tour {
+  background: rgba(255, 255, 255, .08); color: #bfe8de; border: 1px dashed rgba(45, 212, 191, .4);
+  font-size: .74rem; font-weight: 700; border-radius: .8rem; padding: .5rem .6rem;
+  transition: all .2s;
+}
+.btn-tour:hover { background: rgba(45, 212, 191, .18); color: #fff; border-style: solid; }
+
+/* ---------- عنوان بخش در صفحهٔ خانه ---------- */
+.section-cap {
+  display: flex; align-items: center; gap: .45rem;
+  font-size: .82rem; font-weight: 800; color: #3d5f59;
+  margin-bottom: .85rem;
+}
+.section-cap i { color: var(--brand); font-size: .95rem; }
+
+/* ---------- کارت‌های «کارهای پرتکرار» (خانهٔ وظیفه‌محور) ---------- */
+.task-card {
+  display: flex; align-items: center; gap: .9rem; width: 100%;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.05rem 1.1rem; text-align: start; box-shadow: var(--shadow);
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+  height: 100%;
+}
+.task-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); border-color: #bfe3dc; }
+.task-card:hover .task-arrow { transform: translateX(-4px); color: var(--brand); }
+.task-icon {
+  flex: 0 0 auto; width: 52px; height: 52px; border-radius: 1rem;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 1.45rem;
+}
+.task-body { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; }
+.task-t { font-weight: 800; font-size: .92rem; color: var(--ink); }
+.task-s { font-size: .72rem; color: var(--muted); line-height: 1.7; }
+.task-arrow { flex: 0 0 auto; color: #b5cdc8; transition: transform .25s, color .25s; align-self: center; }
+.tc-brand .task-icon { background: var(--brand-soft); color: var(--brand-700); }
+.tc-emerald .task-icon { background: var(--emerald-soft); color: #047857; }
+.tc-amber .task-icon { background: var(--amber-soft); color: #b45309; }
+.tc-rose .task-icon { background: var(--rose-soft); color: #be123c; }
+.tc-violet .task-icon { background: #f3e8ff; color: #7e22ce; }
+.task-card .chip { align-self: flex-start; font-size: .68rem; }
+
+/* ---------- ویزارد ۳ گامی حضور و غیاب ---------- */
+.wiz-progress {
+  display: flex; align-items: center; gap: .6rem;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: .85rem 1.1rem; margin-bottom: 1.2rem; box-shadow: var(--shadow);
+}
+.wstep { display: flex; align-items: center; gap: .5rem; flex: 0 0 auto; }
+.wstep .wnum {
+  width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: #eef4f3; color: #6b8681; font-weight: 800; font-size: .82rem; transition: all .25s;
+}
+.wstep .wt { font-size: .78rem; font-weight: 700; color: #6b8681; white-space: nowrap; }
+.wstep.active .wnum { background: var(--brand); color: #fff; box-shadow: 0 0 0 5px var(--brand-softer); }
+.wstep.active .wt { color: var(--brand-700); }
+.wstep.done .wnum { background: var(--emerald-soft); color: #047857; }
+.wstep.done .wnum::after { content: '\F26E'; font-family: 'bootstrap-icons'; font-size: .8rem; }
+.wstep.done .wnum { font-size: 0; } /* جای عدد، تیک */
+.wline { flex: 1 1 auto; height: 2px; background: #e4edeb; border-radius: 99px; min-width: 14px; }
+@media (max-width: 575.98px) { .wstep .wt { display: none; } .wiz-progress { justify-content: space-around; } .wline { flex: 0 0 16px; } }
+
+/* ---------- کارت انتخاب کلاس (گام ۱) ---------- */
+.cls-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: .3rem; width: 100%; height: 100%;
+  background: #fff; border: 1.5px solid var(--line); border-radius: 1rem; padding: .95rem 1rem;
+  text-align: start; transition: all .2s; cursor: pointer;
+}
+.cls-card:hover { border-color: #7fd4c6; transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.cls-card.selected { border-color: var(--brand); background: var(--brand-softer); box-shadow: inset 0 0 0 1px var(--brand); }
+.cls-card.selected::after { content: 'انتخاب شد ✓'; font-size: .68rem; font-weight: 800; color: var(--brand-700); }
+.cls-badge {
+  color: #fff; font-size: .68rem; font-weight: 800; border-radius: .6rem; padding: .18rem .6rem; margin-bottom: .15rem;
+}
+.cls-t { font-weight: 800; font-size: .86rem; color: var(--ink); }
+.cls-s { font-size: .72rem; color: var(--muted); display: flex; align-items: center; gap: .35rem; }
+
+/* ---------- جعبه‌های بازبینی (گام ۳) ---------- */
+.review-box { border-radius: .9rem; padding: .7rem .4rem; }
+.review-box .rb-num { font-size: 1.3rem; font-weight: 800; line-height: 1.3; }
+.review-box .rb-t { font-size: .72rem; font-weight: 600; }
+.rb-ok { background: var(--emerald-soft); color: #047857; }
+.rb-danger { background: var(--rose-soft); color: #be123c; }
+.rb-warn { background: var(--amber-soft); color: #b45309; }
+.rb-info { background: var(--slate-soft); color: #475569; }
+
+/* ---------- صفحهٔ ثبت موفق ---------- */
+.done-card { text-align: center; padding: 2.4rem 1.4rem; }
+.done-icon {
+  width: 74px; height: 74px; margin: 0 auto; border-radius: 50%;
+  background: var(--emerald-soft); color: #059669; font-size: 2.4rem;
+  display: flex; align-items: center; justify-content: center;
+  animation: popIn .5s cubic-bezier(.2, 1.4, .4, 1);
+}
+@keyframes popIn { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ---------- ناوبری پایین موبایل (مثل اپلیکیشن) ---------- */
+.bottom-nav {
+  position: fixed; bottom: 0; inset-inline: 0; z-index: 1030;
+  display: flex; justify-content: space-around;
+  background: rgba(255, 255, 255, .97); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+  padding: .3rem .3rem calc(.3rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -8px 24px -12px rgba(15, 55, 50, .18);
+}
+.bn-link {
+  display: flex; flex-direction: column; align-items: center; gap: .12rem;
+  flex: 1 1 0; padding: .3rem 0; text-decoration: none;
+  color: #7c9691; font-size: .62rem; font-weight: 700; border-radius: .7rem;
+  transition: color .2s, background .2s; min-height: 44px; justify-content: center;
+}
+.bn-link i { font-size: 1.25rem; }
+.bn-link:hover { color: var(--brand-600); }
+.bn-link.active { color: var(--brand-700); background: var(--brand-softer); }
+@media (max-width: 991.98px) {
+  .content { padding-bottom: calc(1rem + 4.6rem); }
+  .app-footer { margin-bottom: 4.7rem; }
+}
+
+/* ---------- تور راهنمای اسپات‌لایت ---------- */
+#tourOverlay { position: fixed; inset: 0; z-index: 1980; }
+#tourSpot {
+  position: fixed; border-radius: .95rem; pointer-events: none;
+  box-shadow: 0 0 0 200vmax rgba(6, 33, 28, .62), 0 0 0 3px #2dd4bf;
+  transition: top .3s cubic-bezier(.3, .9, .3, 1), left .3s cubic-bezier(.3, .9, .3, 1),
+              width .3s cubic-bezier(.3, .9, .3, 1), height .3s cubic-bezier(.3, .9, .3, 1);
+  z-index: 1981;
+}
+#tourCard {
+  position: fixed; z-index: 1982; width: min(340px, calc(100vw - 24px));
+  background: #fff; border-radius: 1.1rem; padding: 1rem 1.1rem;
+  box-shadow: 0 30px 70px -18px rgba(9, 40, 35, .55);
+  border: 1px solid var(--line);
+  animation: tourIn .3s ease;
+}
+@keyframes tourIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+#tourCard .t-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: .3rem; }
+#tourCard .t-badge { font-size: .68rem; font-weight: 800; background: var(--brand-soft); color: var(--brand-700); border-radius: 99px; padding: .12rem .65rem; }
+#tourCard .t-close { border: 0; background: none; color: #94a3a1; font-size: .85rem; padding: .2rem; }
+#tourCard .t-close:hover { color: var(--rose); }
+#tourCard h6 { font-weight: 800; font-size: .92rem; margin-bottom: .3rem; }
+#tourCard p { font-size: .78rem; color: var(--muted); line-height: 1.9; margin-bottom: .8rem; }
+#tourCard .t-foot { display: flex; justify-content: space-between; gap: .5rem; }
+
+/* ---------- هایلایت موقت ردیف کلاسِ تازه‌افوده ---------- */
+@keyframes rowGlow { 0% { background-color: #d3efe8; } 70% { background-color: #e9f7f3; } 100% { background-color: transparent; } }
+.table-clean > tbody tr.row-new > td { animation: rowGlow 2.4s ease-out forwards; }
