@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>سامانه پایش هوشمند عملکرد دانش‌آموز</title>
+  <meta name="description" content="قالب فرانت‌اند سامانه پایش هوشمند عملکرد، حضور و غیاب و نمرات دانش‌آموزان">
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- ══════════════ پس‌زمینه سایدبار موبایل ══════════════ -->
+  <div class="backdrop"></div>
+
+  <!-- ══════════════ سایدبار ══════════════ -->
+  <aside class="sidebar" aria-label="منوی اصلی">
+    <div class="brand">
+      <span class="brand-logo"><i class="bi bi-mortarboard-fill"></i></span>
+      <div>
+        <div class="brand-title">پایش‌یار</div>
+        <div class="brand-sub">سامانه پایش هوشمند عملکرد</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav sidebar-scroll">
+      <div class="nav-caption">اصلی</div>
+      <a href="#" class="side-link active" data-view="dashboard"><i class="bi bi-speedometer2"></i>داشبورد</a>
+      <a href="#" class="side-link" data-view="students"><i class="bi bi-people"></i>دانش‌آموزان</a>
+      <a href="#" class="side-link" data-view="attendance"><i class="bi bi-calendar2-check"></i>حضور و غیاب</a>
+      <a href="#" class="side-link" data-view="grades"><i class="bi bi-journal-check"></i>نمرات و امتحانات</a>
+      <a href="#" class="side-link" data-view="reports"><i class="bi bi-graph-up-arrow"></i>گزارش‌ها و نمودارها</a>
+
+      <div class="nav-caption">ارتباط و تحلیل</div>
+      <a href="#" class="side-link" data-view="ai"><i class="bi bi-robot"></i>دستیار هوشمند<span class="n-badge">جدید</span></a>
+      <a href="#" class="side-link" data-view="messages"><i class="bi bi-chat-dots"></i>پیام‌های والدین<span class="n-badge" id="navMsgBadge">۶</span></a>
+      <a href="#" class="side-link" data-view="teachers"><i class="bi bi-person-video3"></i>معلمان و کلاس‌ها</a>
+    </nav>
+
+    <div class="side-user">
+      <span class="avatar sm av-teal">م‌ر</span>
+      <div>
+        <div class="name">مریم رستگار</div>
+        <div class="role">مدیر مدرسه</div>
+      </div>
+      <button class="logout" title="خروج" aria-label="خروج" onclick="toast('خروج از حساب — نسخه نمایشی','bi-box-arrow-left')"><i class="bi bi-box-arrow-left"></i></button>
+    </div>
+  </aside>
+
+  <!-- ══════════════ ناحیه اصلی ══════════════ -->
+  <div class="main-area">
+
+    <!-- نوار بالا -->
+    <header class="topbar">
+      <button class="icon-btn d-lg-none" id="burger" aria-label="باز کردن منو"><i class="bi bi-list"></i></button>
+      <div class="me-2 d-none d-sm-block">
+        <h1 class="page-title" id="pageTitle">داشبورد</h1>
+        <div class="crumb" id="pageCrumb">نمای کلی وضعیت مدرسه</div>
+      </div>
+
+      <div class="top-search d-none d-md-block">
+        <i class="bi bi-search"></i>
+        <input type="search" class="form-control" placeholder="جستجوی دانش‌آموز، کلاس، درس..." aria-label="جستجو">
+      </div>
+
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        <span class="d-none d-lg-inline-flex align-items-center gap-1 text-muted" style="font-size:.75rem">
+          <i class="bi bi-calendar3"></i> <span data-today>—</span>
+        </span>
+
+        <div class="dropdown">
+          <button class="icon-btn" data-bs-toggle="dropdown" aria-label="اعلان‌ها" title="اعلان‌ها">
+            <i class="bi bi-bell"></i><span class="ping"></span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-start shadow border-0 p-2" style="width:320px;border-radius:1rem">
+            <div class="px-2 py-1 fw-bold" style="font-size:.8rem">اعلان‌های امروز</div>
+            <a href="#" class="dropdown-item d-flex gap-2 rounded-3 py-2" onclick="showView('messages');return false;">
+              <i class="bi bi-send-x-fill text-danger mt-1"></i>
+              <span style="font-size:.76rem"><b>امیر قاسمی</b> غایب بود — پیام به والدین ارسال شد<div class="text-muted">۰۷:۴۵ صبح</div></span>
+            </a>
+            <a href="#" class="dropdown-item d-flex gap-2 rounded-3 py-2" onclick="showView('messages');return false;">
+              <i class="bi bi-send-x-fill text-danger mt-1"></i>
+              <span style="font-size:.76rem"><b>رضا شریفی</b> غایب بود — پیام به والدین ارسال شد<div class="text-muted">۰۷:۴۵ صبح</div></span>
+            </a>
+            <a href="#" class="dropdown-item d-flex gap-2 rounded-3 py-2" onclick="showView('messages');return false;">
+              <i class="bi bi-clock-fill text-warning mt-1"></i>
+              <span style="font-size:.76rem"><b>کیان مرادی</b> با تأخیر وارد شد<div class="text-muted">۰۸:۱۰ صبح</div></span>
+            </a>
+            <a href="#" class="dropdown-item d-flex gap-2 rounded-3 py-2" onclick="showView('ai');return false;">
+              <i class="bi bi-robot text-success mt-1"></i>
+              <span style="font-size:.76rem">دستیار هوشمند: افت معدل کلاس نهم ۲ را بررسی کنید<div class="text-muted">دیروز</div></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="btn p-0 border-0 bg-transparent" data-bs-toggle="dropdown" aria-label="حساب کاربری">
+            <span class="avatar av-teal">م‌ر</span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-start shadow border-0 p-2" style="border-radius:1rem;min-width:200px">
+            <div class="px-2 py-1"><b style="font-size:.82rem">مریم رستگار</b><div class="text-muted" style="font-size:.7rem">مدیر مدرسهٔ نمونهٔ پایش</div></div>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item rounded-3" href="#" style="font-size:.8rem" onclick="toast('پروفایل — نسخه نمایشی','bi-person');return false;"><i class="bi bi-person"></i> پروفایل من</a>
+            <a class="dropdown-item rounded-3" href="#" style="font-size:.8rem" onclick="toast('تنظیمات — نسخه نمایشی','bi-gear');return false;"><i class="bi bi-gear"></i> تنظیمات سامانه</a>
+            <a class="dropdown-item rounded-3 text-danger" href="#" style="font-size:.8rem" onclick="toast('خروج — نسخه نمایشی','bi-box-arrow-left');return false;"><i class="bi bi-box-arrow-left"></i> خروج</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- محتوا -->
+    <main class="content">
+
+      <!-- ═══════════ داشبورد ═══════════ -->
+      <section id="view-dashboard" class="view">
+        <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-4">
+          <div>
+            <h2 id="greet">صبح بخیر، خانم مدیر 🌤</h2>
+            <p class="text-muted mb-0" style="font-size:.82rem">امروز <span data-today>—</span> — خلاصهٔ وضعیت مدرسهٔ نمونهٔ پایش</p>
+          </div>
+          <button class="btn btn-brand" onclick="showView('ai')"><i class="bi bi-robot me-1"></i> تحلیل هوشمند وضعیت</button>
+        </div>
+
+        <!-- کارت‌های آمار -->
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card-soft stat-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="stat-num" id="statStudents">—</div>
+                  <div class="stat-label">دانش‌آموز فعال</div>
+                  <span class="chip up mt-1"><i class="bi bi-arrow-up-short"></i>۳٫۲٪ این ماه</span>
+                </div>
+                <div>
+                  <span class="stat-icon bg-soft-brand"><i class="bi bi-people-fill"></i></span>
+                  <div class="mt-2" id="spStudents" style="width:96px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card-soft stat-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="stat-num" id="statAttend">—</div>
+                  <div class="stat-label">درصد حضور امروز</div>
+                  <span class="chip down mt-1"><i class="bi bi-arrow-down-short"></i>۱٪ نسبت به دیروز</span>
+                </div>
+                <div>
+                  <span class="stat-icon bg-soft-emerald"><i class="bi bi-calendar2-check-fill"></i></span>
+                  <div class="mt-2" id="spAttend" style="width:96px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card-soft stat-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="stat-num" id="statGpa">—</div>
+                  <div class="stat-label">میانگین نمرات مدرسه</div>
+                  <span class="chip up mt-1"><i class="bi bi-arrow-up-short"></i>۰٫۲ نسبت به ماه قبل</span>
+                </div>
+                <div>
+                  <span class="stat-icon bg-soft-amber"><i class="bi bi-award-fill"></i></span>
+                  <div class="mt-2" id="spGpa" style="width:96px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card-soft stat-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="stat-num" id="statAbsent">—</div>
+                  <div class="stat-label">غایب و تأخیر امروز</div>
+                  <span class="chip flat mt-1">پیام به والدین ارسال شد</span>
+                </div>
+                <div>
+                  <span class="stat-icon bg-soft-rose"><i class="bi bi-person-x-fill"></i></span>
+                  <div class="mt-2" id="spAbsent" style="width:96px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- نمودارها -->
+        <div class="row g-3 mb-4">
+          <div class="col-lg-8">
+            <div class="card-soft h-100">
+              <div class="card-head">
+                <div><h6><i class="bi bi-graph-up text-success me-1"></i> روند حضور و غیاب هفته جاری</h6><span class="hint">درصد حضور در مقابل میانگین منطقه</span></div>
+                <span class="chip flat">۵ روز کاری اخیر</span>
+              </div>
+              <div class="card-body">
+                <div class="chart-wrap" id="chartWeekly"></div>
+                <div class="legend mt-3">
+                  <span class="li"><span class="swatch" style="background:#0d9488"></span>مدرسهٔ ما</span>
+                  <span class="li"><span class="swatch" style="background:#cbd5d3"></span>میانگین منطقه</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card-soft h-100">
+              <div class="card-head"><h6><i class="bi bi-pie-chart text-success me-1"></i> توزیع وضعیت تحصیلی</h6></div>
+              <div class="card-body d-flex flex-column align-items-center justify-content-center gap-3">
+                <div class="chart-wrap" id="chartDist" style="max-width:230px"></div>
+                <div class="legend justify-content-center" id="distLegend"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- غایبین و برترین‌ها -->
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <div class="card-soft h-100">
+              <div class="card-head">
+                <div><h6><i class="bi bi-person-x text-danger me-1"></i> غایبین و تأخیر امروز</h6><span class="hint">پیامک اطلاع‌رسانی به‌صورت خودکار برای والدین ارسال شد</span></div>
+                <button class="btn btn-ghost btn-sm-brand" onclick="showView('attendance')">ثبت حضور و غیاب</button>
+              </div>
+              <div class="card-body pt-1" id="absentList"></div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card-soft h-100">
+              <div class="card-head">
+                <div><h6><i class="bi bi-trophy text-warning me-1"></i> برترین دانش‌آموزان</h6><span class="hint">بر اساس معدل کل سال تحصیلی</span></div>
+                <button class="btn btn-ghost btn-sm-brand" onclick="showView('reports')">مشاهدهٔ گزارش‌ها</button>
+              </div>
+              <div class="card-body pt-1" id="topList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ دانش‌آموزان ═══════════ -->
+      <section id="view-students" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>مدیریت دانش‌آموزان</h2>
+            <p>فهرست کامل دانش‌آموزان به تفکیک پایه، کلاس و وضعیت تحصیلی</p>
+          </div>
+          <button class="btn btn-brand" id="btnAddStudent"><i class="bi bi-person-plus me-1"></i> افزودن دانش‌آموز</button>
+        </div>
+
+        <div class="card-soft mb-3">
+          <div class="card-body">
+            <div class="row g-2 align-items-center">
+              <div class="col-6 col-md-2">
+                <label class="form-label">پایه</label>
+                <select class="form-select" id="fGrade"></select>
+              </div>
+              <div class="col-6 col-md-2">
+                <label class="form-label">کلاس</label>
+                <select class="form-select" id="fClass"></select>
+              </div>
+              <div class="col-6 col-md-2">
+                <label class="form-label">وضعیت تحصیلی</label>
+                <select class="form-select" id="fStatus">
+                  <option value="all">همهٔ وضعیت‌ها</option>
+                  <option>عالی</option><option>خوب</option><option>نیازمند تلاش</option><option>ضعیف</option>
+                </select>
+              </div>
+              <div class="col-6 col-md-4">
+                <label class="form-label">جستجو</label>
+                <input type="search" class="form-control" id="searchStudent" placeholder="نام یا کد دانش‌آموزی...">
+              </div>
+              <div class="col-md-2 text-md-start">
+                <label class="form-label d-none d-md-block">&nbsp;</label>
+                <span class="chip flat"><i class="bi bi-funnel"></i> <span id="studentCount">۰</span> نتیجه</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-soft">
+          <div class="table-responsive" style="max-height:62vh;overflow-y:auto">
+            <table class="table table-clean table-hover align-middle">
+              <thead class="position-sticky top-0 bg-white" style="z-index:5">
+                <tr>
+                  <th>دانش‌آموز</th><th>پایه</th><th>کلاس</th><th>معدل</th><th>درصد حضور</th><th>وضعیت</th><th>عملیات</th>
+                </tr>
+              </thead>
+              <tbody id="studentTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ حضور و غیاب ═══════════ -->
+      <section id="view-attendance" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>ثبت حضور و غیاب</h2>
+            <p>وضعیت هر دانش‌آموز را ثبت کنید؛ در صورت غیبت، پیام اطلاع‌رسانی برای والدین ارسال می‌شود</p>
+          </div>
+          <div class="date-nav">
+            <button class="btn-icon-ghost" aria-label="روز قبل" onclick="toast('انتخاب تاریخ — نسخه نمایشی','bi-calendar3')"><i class="bi bi-chevron-right"></i></button>
+            <span class="d-label" id="attDate">—</span>
+            <button class="btn-icon-ghost" aria-label="روز بعد" onclick="toast('انتخاب تاریخ — نسخه نمایشی','bi-calendar3')"><i class="bi bi-chevron-left"></i></button>
+          </div>
+        </div>
+
+        <div class="card-soft mb-3">
+          <div class="card-body">
+            <div class="row g-2 align-items-end">
+              <div class="col-6 col-md-3">
+                <label class="form-label">پایه</label>
+                <select class="form-select" id="attGrade"></select>
+              </div>
+              <div class="col-6 col-md-3">
+                <label class="form-label">کلاس</label>
+                <select class="form-select" id="attClass"></select>
+              </div>
+              <div class="col-12 col-md-6 d-flex flex-wrap gap-2 justify-content-md-end">
+                <span class="chip up p-2"><i class="bi bi-check-circle"></i> حاضر: <b id="cntPresent">۰</b></span>
+                <span class="chip down p-2"><i class="bi bi-x-circle"></i> غایب: <b id="cntAbsent">۰</b></span>
+                <span class="chip flat p-2" style="background:var(--amber-soft);color:#b45309"><i class="bi bi-clock"></i> تأخیر: <b id="cntLate">۰</b></span>
+                <span class="chip flat p-2"><i class="bi bi-file-text"></i> مجوز: <b id="cntExcused">۰</b></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-lg-7 col-xl-8">
+            <div class="card-soft">
+              <div class="table-responsive" style="max-height:58vh;overflow-y:auto">
+                <table class="table table-clean align-middle">
+                  <thead class="position-sticky top-0 bg-white" style="z-index:5">
+                    <tr><th>دانش‌آموز</th><th>والدین</th><th class="d-none d-md-table-cell">تماس اضطراری</th><th>وضعیت امروز</th><th>نتیجه</th></tr>
+                  </thead>
+                  <tbody id="attTbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 col-xl-4">
+            <div class="card-soft h-100">
+              <div class="card-head"><h6><i class="bi bi-send text-success me-1"></i> اطلاع‌رسانی خودکار به والدین</h6></div>
+              <div class="card-body">
+                <div class="sms-preview mb-3" id="smsBox"></div>
+                <button class="btn btn-brand w-100" id="btnNotify"><i class="bi bi-send-check me-1"></i> ثبت حضور و غیاب + ارسال پیام</button>
+                <div class="text-muted mt-2" style="font-size:.7rem"><i class="bi bi-info-circle"></i> در نسخهٔ نهایی، پیامک از طریق سرویس پیام‌رسان مدرسه ارسال می‌شود.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-soft mt-3">
+          <div class="card-head"><h6><i class="bi bi-clock-history text-success me-1"></i> سابقهٔ حضور و غیاب هفتهٔ اخیر</h6></div>
+          <div class="table-responsive">
+            <table class="table table-clean">
+              <thead><tr><th>تاریخ</th><th>کلاس</th><th>حاضر</th><th>غایب</th><th>تأخیر</th><th>اطلاع‌رسانی</th></tr></thead>
+              <tbody>
+                <tr><td>چهارشنبه ۲۱ آذر</td><td>نهم ۱</td><td>۲۳</td><td class="text-danger">۱</td><td class="text-warning">۱</td><td><i class="bi bi-check2-circle text-success"></i> ارسال شد</td></tr>
+                <tr><td>سه‌شنبه ۲۰ آذر</td><td>نهم ۱</td><td>۲۵</td><td class="text-danger">۰</td><td class="text-warning">۰</td><td><span class="text-muted">بدون مورد</span></td></tr>
+                <tr><td>دوشنبه ۱۹ آذر</td><td>هشتم ۱</td><td>۲۲</td><td class="text-danger">۲</td><td class="text-warning">۱</td><td><i class="bi bi-check2-circle text-success"></i> ارسال شد</td></tr>
+                <tr><td>یکشنبه ۱۸ آذر</td><td>سوم ۱</td><td>۲۱</td><td class="text-danger">۱</td><td class="text-warning">۰</td><td><i class="bi bi-check2-circle text-success"></i> ارسال شد</td></tr>
+                <tr><td>شنبه ۱۶ آذر</td><td>هفتم ۲</td><td>۲۴</td><td class="text-danger">۲</td><td class="text-warning">۰</td><td><i class="bi bi-check2-circle text-success"></i> ارسال شد</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ نمرات و امتحانات ═══════════ -->
+      <section id="view-grades" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>نمرات و امتحانات</h2>
+            <p>ثبت نمرات هر امتحان و مدیریت تقویم امتحانات سال تحصیلی</p>
+          </div>
+          <nav class="nav nav-pills-soft">
+            <button class="nav-link active" data-tab="entry"><i class="bi bi-pencil-square me-1"></i>ثبت نمرات</button>
+            <button class="nav-link" data-tab="exams"><i class="bi bi-journal-text me-1"></i>فهرست امتحانات</button>
+          </nav>
+        </div>
+
+        <!-- ثبت نمرات -->
+        <div id="paneEntry">
+          <div class="card-soft mb-3">
+            <div class="card-body">
+              <div class="row g-2 align-items-end">
+                <div class="col-md-6">
+                  <label class="form-label">انتخاب امتحان</label>
+                  <select class="form-select" id="gradeExam"></select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">مشخصات</label>
+                  <div class="form-control bg-light" id="gradeExamInfo" style="border:1px dashed var(--line)">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-soft">
+            <div class="card-head">
+              <h6><i class="bi bi-pencil-square text-success me-1"></i> فهرست نمرات</h6>
+              <button class="btn btn-brand btn-sm-brand" id="btnSaveGrades"><i class="bi bi-check2 me-1"></i> ذخیرهٔ نمرات</button>
+            </div>
+            <div class="table-responsive" style="max-height:52vh;overflow-y:auto">
+              <table class="table table-clean align-middle">
+                <thead class="position-sticky top-0 bg-white" style="z-index:5">
+                  <tr><th>#</th><th>دانش‌آموز</th><th class="d-none d-md-table-cell">کلاس</th><th>نمره</th><th>توضیحات</th><th>وضعیت</th></tr>
+                </thead>
+                <tbody id="gradeTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- فهرست امتحانات -->
+        <div id="paneExams" class="d-none">
+          <div class="card-soft">
+            <div class="card-head">
+              <h6><i class="bi bi-journal-text text-success me-1"></i> تقویم امتحانات سال تحصیلی ۱۴۰۳–۱۴۰۴</h6>
+              <button class="btn btn-brand btn-sm-brand" id="btnAddExam"><i class="bi bi-plus-lg me-1"></i> افزودن امتحان</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-clean align-middle">
+                <thead><tr><th>عنوان امتحان</th><th>درس</th><th>پایه</th><th>تاریخ</th><th>نوع</th><th>نمرهٔ کل</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                <tbody id="examsTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ گزارش‌ها ═══════════ -->
+      <section id="view-reports" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>گزارش‌ها و نمودارها</h2>
+            <p>کارنامه، روند تحصیلی و تحلیل وضعیت هر دانش‌آموز</p>
+          </div>
+          <div class="d-flex gap-2 no-print">
+            <button class="btn btn-ghost" id="btnPrint"><i class="bi bi-printer me-1"></i> چاپ کارنامه</button>
+            <button class="btn btn-brand" id="btnReport"><i class="bi bi-arrow-repeat me-1"></i> نمایش گزارش</button>
+          </div>
+        </div>
+
+        <div class="card-soft mb-3 no-print">
+          <div class="card-body py-3">
+            <div class="row g-2 align-items-end">
+              <div class="col-md-5">
+                <label class="form-label">انتخاب دانش‌آموز</label>
+                <select class="form-select" id="reportStudent"></select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">بازهٔ گزارش</label>
+                <select class="form-select">
+                  <option>سال تحصیلی جاری (۱۴۰۵–۱۴۰۶)</option>
+                  <option>ترم اول</option>
+                  <option>ترم دوم</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-soft mb-3">
+          <div class="card-body" id="reportHead"></div>
+          <div class="card-body pt-0" id="reportInsight"></div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-lg-7">
+            <div class="card-soft h-100">
+              <div class="card-head"><h6><i class="bi bi-graph-up text-success me-1"></i> روند معدل ماهانه</h6><span class="hint">در مقایسه با میانگین کلاس</span></div>
+              <div class="card-body">
+                <div class="chart-wrap" id="chartTrend"></div>
+                <div class="legend mt-3">
+                  <span class="li"><span class="swatch" style="background:#0d9488"></span>این دانش‌آموز</span>
+                  <span class="li"><span class="swatch" style="background:#cbd5d3"></span>میانگین کلاس</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="card-soft h-100">
+              <div class="card-head"><h6><i class="bi bi-calendar2-check text-success me-1"></i> خلاصهٔ حضور و غیاب سال</h6></div>
+              <div class="card-body d-flex flex-column align-items-center gap-3">
+                <div class="chart-wrap" id="chartAtt" style="max-width:220px"></div>
+                <div class="legend justify-content-center" id="attLegend"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-soft mb-3">
+          <div class="card-head"><h6><i class="bi bi-bar-chart text-success me-1"></i> مقایسهٔ نمرات دروس</h6><span class="hint">نمرهٔ نهایی از ۲۰</span></div>
+          <div class="card-body" id="subjectBars"></div>
+        </div>
+
+        <div class="card-soft">
+          <div class="card-head"><h6><i class="bi bi-file-earmark-bar-graph text-success me-1"></i> کارنامهٔ تفصیلی</h6><span class="hint">مستمر و میان‌ترم از ۲۰ — نهایی: وزنی</span></div>
+          <div class="table-responsive">
+            <table class="table table-clean align-middle">
+              <thead><tr><th>درس</th><th>مستمر</th><th>میان‌ترم</th><th>پایان‌ترم</th><th>نمرهٔ نهایی</th><th>وضعیت</th><th>دبیر / معلم</th></tr></thead>
+              <tbody id="reportTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ دستیار هوشمند ═══════════ -->
+      <section id="view-ai" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>دستیار هوشمند</h2>
+            <p>متصل به داده‌های حضور و غیاب، نمرات و امتحانات همین سامانه</p>
+          </div>
+          <span class="chip up p-2"><span class="ping d-inline-block" style="position:static"></span> متصل به پایگاه دادهٔ مدرسه</span>
+        </div>
+
+        <div class="card-soft chat-shell">
+          <div class="card-head border-bottom" style="padding-bottom:.8rem">
+            <div class="d-flex align-items-center gap-2">
+              <span class="avatar sm" style="background:var(--brand-soft);color:var(--brand-700)"><i class="bi bi-robot"></i></span>
+              <div><h6 class="mb-0">دستیار تحلیل عملکرد</h6><span class="hint">پرسش‌های خود را دربارهٔ وضعیت دانش‌آموزان بپرسید</span></div>
+            </div>
+          </div>
+
+          <div class="chat-body" id="chatBody"></div>
+
+          <div class="suggest-chips" id="sugChips"></div>
+
+          <div class="chat-input">
+            <input type="text" class="form-control" id="chatInput" placeholder="مثلاً: وضعیت علی رضایی چطور است؟" aria-label="پیام شما">
+            <button class="btn btn-brand" id="btnSend" aria-label="ارسال"><i class="bi bi-send-fill"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ پیام‌های والدین ═══════════ -->
+      <section id="view-messages" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>پیام‌های والدین</h2>
+            <p>پیامک‌های اطلاع‌رسانی ارسال‌شده به اولیای دانش‌آموزان</p>
+          </div>
+          <button class="btn btn-brand" id="btnNewMsg"><i class="bi bi-plus-lg me-1"></i> ارسال پیام جدید</button>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-12 col-md-4">
+            <div class="card-soft stat-card d-flex align-items-center gap-3">
+              <span class="stat-icon bg-soft-brand"><i class="bi bi-send-fill"></i></span>
+              <div><div class="stat-num" id="msgToday">۰</div><div class="stat-label">ارسال امروز</div></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card-soft stat-card d-flex align-items-center gap-3">
+              <span class="stat-icon bg-soft-emerald"><i class="bi bi-check2-all"></i></span>
+              <div><div class="stat-num" id="msgDelivered">۰</div><div class="stat-label">تحویل موفق</div></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card-soft stat-card d-flex align-items-center gap-3">
+              <span class="stat-icon bg-soft-amber"><i class="bi bi-hourglass-split"></i></span>
+              <div><div class="stat-num" id="msgPending">۰</div><div class="stat-label">در انتظار ارسال</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-soft">
+          <div class="table-responsive">
+            <table class="table table-clean align-middle">
+              <thead><tr><th>زمان</th><th>دانش‌آموز</th><th>نوع پیام</th><th>متن پیام</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+              <tbody id="msgTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ معلمان و کلاس‌ها ═══════════ -->
+      <section id="view-teachers" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>معلمان و کلاس‌ها</h2>
+            <p>سازماندهی دبیران، دروس و کلاس‌های هر پایه — هر درس می‌تواند دبیر مستقل داشته باشد یا یک معلم همهٔ دروس یک پایه را ارایه دهد</p>
+          </div>
+          <button class="btn btn-brand" id="btnAddTeacher"><i class="bi bi-person-plus me-1"></i> افزودن معلم</button>
+        </div>
+
+        <div class="row g-3 mb-4" id="teacherGrid"></div>
+
+        <div class="card-soft">
+          <div class="card-head"><h6><i class="bi bi-easel text-success me-1"></i> کلاس‌های فعال مدرسه</h6><span class="hint">۹ کلاس در ۶ پایه</span></div>
+          <div class="table-responsive">
+            <table class="table table-clean align-middle">
+              <thead><tr><th>پایه</th><th>کلاس</th><th>معلم راهنما</th><th>تعداد دانش‌آموز</th><th>میانگین معدل</th><th>سطح</th></tr></thead>
+              <tbody id="classesTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+</div>
+
+<!-- ═══════════════════ مودال‌ها ═══════════════════ -->
+
+<!-- افزودن دانش‌آموز -->
+<div class="modal fade" id="studentModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-person-plus text-success me-1"></i> افزودن دانش‌آموز جدید</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body">
+        <form id="studentForm" onsubmit="return false">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">نام و نام خانوادگی *</label><input class="form-control" id="stName" placeholder="مثلاً: نیلوفر اسدی"></div>
+            <div class="col-6 col-md-3">
+              <label class="form-label">پایه</label>
+              <select class="form-select" id="stGrade"></select>
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="form-label">کلاس</label>
+              <select class="form-select" id="stClass"><option value="۱">کلاس ۱</option><option value="۲">کلاس ۲</option></select>
+            </div>
+            <div class="col-md-6"><label class="form-label">نام والدین / ولی</label><input class="form-control" id="stParent" placeholder="مثلاً: آقای اسدی"></div>
+            <div class="col-md-6"><label class="form-label">شماره تماس والدین</label><input class="form-control" id="stPhone" placeholder="۰۹۱۲..." dir="ltr" style="text-align:right"></div>
+            <div class="col-6 col-md-3"><label class="form-label">معدل اولیه</label><input type="number" class="form-control" id="stGpa" min="0" max="20" step="0.25" value="16"></div>
+            <div class="col-6 col-md-3"><label class="form-label">درصد حضور</label><input type="number" class="form-control" id="stAttend" min="0" max="100" value="95"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-bs-dismiss="modal">انصراف</button>
+        <button class="btn btn-brand" id="btnSaveStudent"><i class="bi bi-check2 me-1"></i> ذخیره</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- پرونده دانش‌آموز -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-person-vcard text-success me-1"></i> پروندهٔ دانش‌آموز</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body" id="profileBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- افزودن امتحان -->
+<div class="modal fade" id="examModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-journal-plus text-success me-1"></i> افزودن امتحان</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body">
+        <form id="examForm" onsubmit="return false">
+          <div class="row g-3">
+            <div class="col-12"><label class="form-label">عنوان امتحان *</label><input class="form-control" id="examTitle" placeholder="مثلاً: امتحان پایانی ریاضی نهم"></div>
+            <div class="col-md-6"><label class="form-label">درس</label><select class="form-select" id="examSubject"></select></div>
+            <div class="col-md-6"><label class="form-label">پایه</label><select class="form-select" id="examGrade"></select></div>
+            <div class="col-md-4"><label class="form-label">تاریخ</label><input class="form-control" id="examDate" placeholder="۱۴۰۳/۱۰/۱۰"></div>
+            <div class="col-md-4"><label class="form-label">نوع</label><select class="form-select" id="examKind"><option>مستمر</option><option>میان‌ترم</option><option>پایانی</option></select></div>
+            <div class="col-md-4"><label class="form-label">نمرهٔ کل</label><input type="number" class="form-control" id="examMax" min="1" max="100" value="20"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-bs-dismiss="modal">انصراف</button>
+        <button class="btn btn-brand" id="btnSaveExam"><i class="bi bi-check2 me-1"></i> ذخیره</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- افزودن معلم -->
+<div class="modal fade" id="teacherModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-person-plus text-success me-1"></i> افزودن معلم</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body">
+        <form id="teacherForm" onsubmit="return false">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">نام و نام خانوادگی *</label><input class="form-control" id="teacherName" placeholder="مثلاً: لیا فرهادی"></div>
+            <div class="col-md-6"><label class="form-label">درس / سمت</label><input class="form-control" id="teacherSubject" placeholder="مثلاً: ریاضی یا «تمام دروس پایهٔ دوم»"></div>
+            <div class="col-12"><label class="form-label">کلاس‌ها / پایه‌ها</label><input class="form-control" id="teacherClasses" placeholder="مثلاً: دوم، سوم یا هفتم تا نهم"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-bs-dismiss="modal">انصراف</button>
+        <button class="btn btn-brand" id="btnSaveTeacher"><i class="bi bi-check2 me-1"></i> ذخیره</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ارسال پیام جدید -->
+<div class="modal fade" id="msgModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-chat-dots text-success me-1"></i> ارسال پیام به والدین</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body">
+        <form id="msgForm" onsubmit="return false">
+          <div class="mb-3">
+            <label class="form-label">دانش‌آموز</label>
+            <select class="form-select" id="msgStudent"></select>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">متن پیام</label>
+            <textarea class="form-control" id="msgText" rows="4" placeholder="متن پیامی که برای والدین ارسال می‌شود..."></textarea>
+          </div>
+          <div class="text-muted" style="font-size:.72rem"><i class="bi bi-info-circle"></i> پیام پس از تأیید، به شمارهٔ والدین پیامک می‌شود.</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-bs-dismiss="modal">انصراف</button>
+        <button class="btn btn-brand" id="btnSendMsg"><i class="bi bi-send me-1"></i> ارسال</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-host" aria-live="polite"></div>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
