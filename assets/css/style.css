@@ -646,3 +646,35 @@ body {
 /* ---------- هایلایت موقت ردیف کلاسِ تازه‌افوده ---------- */
 @keyframes rowGlow { 0% { background-color: #d3efe8; } 70% { background-color: #e9f7f3; } 100% { background-color: transparent; } }
 .table-clean > tbody tr.row-new > td { animation: rowGlow 2.4s ease-out forwards; }
+
+/* ============================================================
+   افت و پیشرفت تحصیلی — هشدار داشبورد و صفحهٔ جدید
+   ============================================================ */
+.trend-alert {
+  background: linear-gradient(135deg, #fff1f3 0%, #fff 55%);
+  border: 1px solid #fecdd3;
+}
+.trend-alert-icon {
+  width: 46px; height: 46px; border-radius: .95rem; flex: 0 0 auto;
+  background: #ffe4e8; color: #be123c; display: grid; place-items: center; font-size: 1.3rem;
+}
+.mini-student {
+  display: flex; align-items: center; gap: .55rem; width: 100%;
+  background: #fff; border: 1px solid #fda4af; border-radius: .8rem;
+  padding: .55rem .75rem; text-align: start; transition: all .18s; cursor: pointer;
+}
+.mini-student:hover { border-color: #f43f5e; transform: translateY(-1px); box-shadow: 0 6px 16px -8px rgba(190, 18, 60, .3); }
+.mini-student .ms-t { font-weight: 700; font-size: .78rem; color: var(--ink); }
+.mini-student .ms-s { font-size: .68rem; color: var(--muted); }
+.trend-card.down { border-inline-start: 4px solid #f43f5e; }
+.trend-card.up { border-inline-start: 4px solid #10b981; }
+.trend-card .row-item .end .btn-sm-brand { font-size: .68rem; padding: .22rem .55rem; }
+
+/* ---------- جستجوی سریع دانش‌آموز در حضور و غیاب ---------- */
+.att-search { position: relative; }
+.att-search > i {
+  position: absolute; top: 50%; right: .95rem; transform: translateY(-50%);
+  color: #9ab3ae; font-size: .85rem; pointer-events: none; z-index: 5;
+}
+.att-search .form-control { padding-right: 2.5rem; border-radius: .8rem; }
+.att-search .form-control:focus { border-color: var(--brand); box-shadow: 0 0 0 .2rem var(--brand-softer); }

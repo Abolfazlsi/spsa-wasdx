@@ -50,6 +50,10 @@
         <i class="bi bi-people"></i>
         <span class="side-wrap"><span class="side-txt">دانش‌آموزان و کلاس‌ها</span><span class="side-sub">فهرست، کارنامه و معلمان</span></span>
       </a>
+      <a href="#" class="side-link" data-view="trend">
+        <i class="bi bi-graph-down-arrow"></i>
+        <span class="side-wrap"><span class="side-txt">افت و پیشرفت</span><span class="side-sub">هشدار افت و تقدیر از پیشرفت</span></span>
+      </a>
       <a href="#" class="side-link" data-view="grades">
         <i class="bi bi-journal-check"></i>
         <span class="side-wrap"><span class="side-txt">نمرات و امتحانات</span><span class="side-sub">ثبت نمره و تقویم امتحانات</span></span>
@@ -277,6 +281,21 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- ⚠️ هشدار افت تحصیلی — مدیر سریع متوجه می‌شود (فقط وقتی افت وجود داشته باشد نمایش داده می‌شود) -->
+        <div class="card-soft trend-alert mb-4 d-none" id="declineAlert">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
+              <span class="trend-alert-icon"><i class="bi bi-graph-down-arrow"></i></span>
+              <div class="flex-grow-1">
+                <h6 class="mb-0"><b id="declineAlertCount">۰</b> دانش‌آموز افت تحصیلی دارند</h6>
+                <div class="text-muted" style="font-size:.72rem">افت معدل نسبت به ماه قبل — پیگیری زودهنگام خیلی مؤثر است</div>
+              </div>
+              <button class="btn btn-ghost" onclick="showView('trend')"><i class="bi bi-arrow-left me-1"></i> مشاهده و پیگیری</button>
+            </div>
+            <div class="row g-2" id="declineAlertList"></div>
           </div>
         </div>
 
@@ -526,14 +545,24 @@
                   <span class="chip flat p-2"><i class="bi bi-file-text"></i> مجوز: <b id="cntExcused">۰</b></span>
                 </div>
               </div>
-              <div class="text-muted mt-2" style="font-size:.7rem"><i class="bi bi-info-circle"></i> فهرست نمونهٔ نمایشی است؛ در نسخهٔ اصلی، دانش‌آموزانِ همان کلاس بارگذاری می‌شوند.</div>
+              <div class="row g-2 mt-1 align-items-center">
+                <div class="col-md-7">
+                  <div class="att-search">
+                    <i class="bi bi-search"></i>
+                    <input type="search" class="form-control" id="attSearch" placeholder="جستجوی سریع نام یا کد دانش‌آموز..." aria-label="جستجوی دانش‌آموز در فهرست حضور و غیاب">
+                  </div>
+                </div>
+                <div class="col-md-5 text-muted d-flex align-items-center gap-1" style="font-size:.7rem">
+                  <i class="bi bi-person-check"></i> <span id="attVisibleCount">۵ نفر نمایش داده می‌شود</span>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="card-soft">
             <div class="card-head">
               <h6><i class="bi bi-check2-square text-success me-1"></i> وضعیت هر دانش‌آموز را علامت بزنید</h6>
-              <span class="hint">روی حاضر / غایب / تأخیر / مجوز کلیک کنید</span>
+              <span class="hint">همه به‌صورت پیش‌فرض «حاضر» هستند — فقط غایب، تأخیر یا مجوزها را علامت بزنید (فهرست نمونهٔ نمایشی است)</span>
             </div>
             <div class="table-responsive" style="max-height:52vh;overflow-y:auto">
               <table class="table table-clean align-middle">
@@ -586,7 +615,7 @@
                     </div></td>
                     <td><span class="status-pill st-excellent" data-pill>حاضر</span></td>
                   </tr>
-                  <tr data-id="۱۰۴۵" data-name="آرش کاظمی" data-parent="آقای کاظمی" data-phone="۰۹۱۹۸۸۸۷۷۶۶" data-status="late">
+                  <tr data-id="۱۰۴۵" data-name="آرش کاظمی" data-parent="آقای کاظمی" data-phone="۰۹۱۹۸۸۸۷۷۶۶" data-status="present">
                     <td><div class="d-flex align-items-center gap-2">
                       <span class="avatar sm av-violet">آک</span>
                       <div><div class="fw-bold" style="font-size:.85rem">آرش کاظمی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۵ — کلاس ۱</div></div>
@@ -594,14 +623,14 @@
                     <td>آقای کاظمی</td>
                     <td class="d-none d-md-table-cell">۰۹۱۹۸۸۸۷۷۶۶</td>
                     <td><div class="seg">
-                      <button type="button" class="seg-btn"><i class="bi bi-check-circle"></i>حاضر</button>
+                      <button type="button" class="seg-btn present" data-v="present"><i class="bi bi-check-circle"></i>حاضر</button>
                       <button type="button" class="seg-btn" data-v="absent"><i class="bi bi-x-circle"></i>غایب</button>
-                      <button type="button" class="seg-btn late" data-v="late"><i class="bi bi-clock"></i>تأخیر</button>
+                      <button type="button" class="seg-btn" data-v="late"><i class="bi bi-clock"></i>تأخیر</button>
                       <button type="button" class="seg-btn" data-v="excused"><i class="bi bi-file-earmark-text"></i>مجوز</button>
                     </div></td>
-                    <td><span class="status-pill st-warn" data-pill>تأخیر</span></td>
+                    <td><span class="status-pill st-excellent" data-pill>حاضر</span></td>
                   </tr>
-                  <tr data-id="۱۰۴۶" data-name="امیر قاسمی" data-parent="آقای قاسمی" data-phone="۰۹۱۲۷۷۷۸۸۹۹" data-status="absent">
+                  <tr data-id="۱۰۴۶" data-name="امیر قاسمی" data-parent="آقای قاسمی" data-phone="۰۹۱۲۷۷۷۸۸۹۹" data-status="present">
                     <td><div class="d-flex align-items-center gap-2">
                       <span class="avatar sm av-rose">اق</span>
                       <div><div class="fw-bold" style="font-size:.85rem">امیر قاسمی</div><div class="text-muted" style="font-size:.7rem">کد: ۱۰۴۶ — کلاس ۲</div></div>
@@ -609,13 +638,14 @@
                     <td>آقای قاسمی</td>
                     <td class="d-none d-md-table-cell">۰۹۱۲۷۷۷۸۸۹۹</td>
                     <td><div class="seg">
-                      <button type="button" class="seg-btn"><i class="bi bi-check-circle"></i>حاضر</button>
-                      <button type="button" class="seg-btn absent" data-v="absent"><i class="bi bi-x-circle"></i>غایب</button>
+                      <button type="button" class="seg-btn present" data-v="present"><i class="bi bi-check-circle"></i>حاضر</button>
+                      <button type="button" class="seg-btn" data-v="absent"><i class="bi bi-x-circle"></i>غایب</button>
                       <button type="button" class="seg-btn" data-v="late"><i class="bi bi-clock"></i>تأخیر</button>
                       <button type="button" class="seg-btn" data-v="excused"><i class="bi bi-file-earmark-text"></i>مجوز</button>
                     </div></td>
-                    <td><span class="status-pill st-danger" data-pill>غایب</span></td>
+                    <td><span class="status-pill st-excellent" data-pill>حاضر</span></td>
                   </tr>
+                  <tr id="attSearchEmpty" class="d-none"><td colspan="5"><div class="empty-hint">دانش‌آموزی با این نام یا کد پیدا نشد</div></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1158,6 +1188,46 @@
         </div>
       </section>
 
+      <!-- ═══════════ افت و پیشرفت تحصیلی — صفحهٔ جدید (منبع داده: جدول دانش‌آموزان در همین HTML) ═══════════ -->
+      <section id="view-trend" class="view d-none">
+        <div class="page-head">
+          <div>
+            <h2>افت و پیشرفت تحصیلی</h2>
+            <p>دانش‌آموزانی که نسبت به ماه قبل افت یا پیشرفت معدل داشته‌اند — یک‌جا و بدون جستجو</p>
+          </div>
+          <div class="d-flex gap-2 flex-wrap">
+            <span class="chip down p-2"><i class="bi bi-graph-down-arrow"></i> افت: <b id="trendDownCount">۰</b> نفر</span>
+            <span class="chip up p-2"><i class="bi bi-graph-up-arrow"></i> پیشرفت: <b id="trendUpCount">۰</b> نفر</span>
+          </div>
+        </div>
+
+        <!-- افت تحصیلی — نیازمند اقدام -->
+        <div class="card-soft trend-card down mb-4">
+          <div class="card-head">
+            <h6><i class="bi bi-graph-down-arrow text-danger me-1"></i> افت تحصیلی — نیازمند اقدام و پیگیری</h6>
+            <span class="hint">مرتب‌شده بر اساس میزان افت</span>
+          </div>
+          <div class="card-body pt-1" id="trendDownList">
+            <div class="empty-hint mb-0">در حال خواندن از فهرست دانش‌آموزان...</div>
+          </div>
+        </div>
+
+        <!-- پیشرفت تحصیلی — قابل تقدیر -->
+        <div class="card-soft trend-card up">
+          <div class="card-head">
+            <h6><i class="bi bi-graph-up-arrow text-success me-1"></i> پیشرفت تحصیلی — قابل تقدیر و تشویق</h6>
+            <span class="hint">مرتب‌شده بر اساس میزان پیشرفت</span>
+          </div>
+          <div class="card-body pt-1" id="trendUpList">
+            <div class="empty-hint mb-0">در حال خواندن از فهرست دانش‌آموزان...</div>
+          </div>
+        </div>
+
+        <div class="text-muted mt-3 d-flex align-items-center gap-1" style="font-size:.72rem">
+          <i class="bi bi-info-circle"></i> محاسبه بر اساس تغییر معدل نسبت به ماه قبل است و مستقیم از جدول «فهرست دانش‌آموزان» خوانده می‌شود.
+        </div>
+      </section>
+
       <!-- ═══════════ نمرات و امتحانات (داده‌های تستی مستقیم در HTML) ═══════════ -->
       <section id="view-grades" class="view d-none">
         <div class="page-head">
@@ -1457,12 +1527,6 @@
       </section>
 
     </main>
-
-    <!-- ═══════════ فوتر ═══════════ -->
-    <footer class="app-footer">
-      <span>© ۱۴۰۳ سامانه پایش هوشمند «پایش‌یار» — نسخهٔ نمایشی قالب</span>
-      <span>ساخته‌شده با <i class="bi bi-filetype-html text-success"></i> HTML · CSS · JavaScript · <i class="bi bi-bootstrap text-success"></i> Bootstrap 5</span>
-    </footer>
   </div>
 </div>
 
@@ -1485,10 +1549,11 @@
         <h5 class="modal-title"><i class="bi bi-hand-thumbs-up-fill text-success me-1"></i> سلام! سایت ساده‌تر شد</h5>
       </div>
       <div class="modal-body">
-        <p style="font-size:.82rem" class="text-muted">این سامانه حالا فقط <b>۵ بخش اصلی</b> دارد؛ همه‌چیز از «خانه» شروع می‌شود:</p>
+        <p style="font-size:.82rem" class="text-muted">این سامانه حالا فقط <b>۶ بخش اصلی</b> دارد؛ همه‌چیز از «خانه» شروع می‌شود:</p>
         <div class="row-item"><span class="avatar sm av-teal"><i class="bi bi-house-door"></i></span><div><div class="t">خانه</div><div class="s">کارت‌های بزرگِ کارهای پرتکرار — هر کاری یک کلیک</div></div></div>
         <div class="row-item"><span class="avatar sm av-emerald"><i class="bi bi-calendar2-check"></i></span><div><div class="t">حضور و غیاب</div><div class="s">در ۳ گام ساده؛ غیبت‌ها خودکار به والدین پیامک می‌شود</div></div></div>
         <div class="row-item"><span class="avatar sm av-amber"><i class="bi bi-people"></i></span><div><div class="t">دانش‌آموزان و کلاس‌ها</div><div class="s">فهرست، کارنامه و معلمان — در سه تب کنار هم</div></div></div>
+        <div class="row-item"><span class="avatar sm av-rose"><i class="bi bi-graph-down-arrow"></i></span><div><div class="t">افت و پیشرفت</div><div class="s">هشدار سریع افت تحصیلی و فهرست پیشرفت‌ها</div></div></div>
         <div class="row-item"><span class="avatar sm av-rose"><i class="bi bi-patch-question"></i></span><div><div class="t">راهنما</div><div class="s">هر وقت گم شدید، دکمهٔ «؟» بالای صفحه را بزنید</div></div></div>
       </div>
       <div class="modal-footer">

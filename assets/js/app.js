@@ -38,6 +38,7 @@ const VIEW_TITLES = {
   dashboard:  ['خانه', 'کارهای امروز از همین‌جا شروع می‌شود'],
   attendance: ['حضور و غیاب', 'در ۳ گام ساده — با اطلاع‌رسانی خودکار به والدین'],
   students:   ['دانش‌آموزان و کلاس‌ها', 'فهرست دانش‌آموزان، کارنامه و معلمان — در سه تب'],
+  trend:      ['افت و پیشرفت تحصیلی', 'هشدار افت تحصیلی و فهرست دانش‌آموزان در حال پیشرفت'],
   grades:     ['نمرات و امتحانات', 'ثبت نمرات و تقویم امتحانات سال تحصیلی'],
   messages:   ['پیام به والدین', 'پیامک‌های اطلاع‌رسانی و ارسال پیام جدید'],
   ai:         ['دستیار هوشمند', 'پرسش و پاسخ بر اساس داده‌های سامانه'],
@@ -136,6 +137,42 @@ function updateAttSummary() {
   $('#cntExcused').textContent = toFa(attCount('excused'));
 }
 
+/* جستجوی سریع دانش‌آموز در جدول ثبت وضعیت — با نام یا کد دانش‌آموزی
+   تا مدیر مجبور نباشد بین ۳۰ نفر بگردد */
+function applyAttSearch() {
+  const input = $('#attSearch');
+  const q = input ? input.value.trim() : '';
+  const rows = $$('#attTbody tr[data-name]');
+  let visible = 0;
+  rows.forEach(tr => {
+    const d = tr.dataset;
+    const ok = !q || d.name.includes(q) || toEn(d.id).includes(toEn(q));
+    tr.classList.toggle('d-none', !ok);
+    if (ok) visible++;
+  });
+  $('#attSearchEmpty').classList.toggle('d-none', visible > 0);
+  $('#attVisibleCount').textContent = q
+    ? `${toFa(visible)} نفر از ${toFa(rows.length)} پیدا شد`
+    : `${toFa(rows.length)} نفر نمایش داده می‌شود`;
+}
+
+/* بازگرداندن همهٔ ردیف‌ها به «حاضر» — شروع تازه برای کلاس بعدی
+   (همه به‌صورت پیش‌فرض حاضر هستند؛ مدیر فقط غایبین را علامت می‌زند) */
+function resetAttRowsToPresent() {
+  attRows().forEach(tr => {
+    tr.dataset.status = 'present';
+    tr.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('present', 'absent', 'late', 'excused'));
+    const p = tr.querySelector('.seg-btn[data-v="present"]');
+    if (p) p.classList.add('present');
+    const pill = tr.querySelector('[data-pill]');
+    if (pill) {
+      pill.textContent = ATT_PILL.present[0];
+      pill.className = `status-pill ${ATT_PILL.present[1]}`;
+    }
+  });
+  updateAttSummary();
+}
+
 function buildAttReview() {
   $('#revPresent').textContent = toFa(attCount('present'));
   $('#revAbsent').textContent = toFa(attCount('absent'));
@@ -203,6 +240,10 @@ function attRestart() {
   $('#attToStep2').disabled = true;
   $('#attSelClass').innerHTML = '<i class="bi bi-easel2"></i> کلاسی انتخاب نشده';
   $$('#attClassCards .cls-card').forEach(c => c.classList.remove('selected'));
+  const s = $('#attSearch');
+  if (s) s.value = '';
+  applyAttSearch();
+  resetAttRowsToPresent();
   goAttStep(1);
 }
 
@@ -369,13 +410,87 @@ function saveClass() {
 }
 
 /* ============================================================
+   افت و پیشرفت تحصیلی — صفحهٔ جدید + هشدار داشبورد
+   منبع داده: data-attribute های جدول «فهرست دانش‌آموزان»
+   (trend منفی = افت، مثبت = پیشرفت — هیچ دادهٔ جدیدی اینجا تعریف نمی‌شود)
+   ============================================================ */
+function initialsOf(name) {
+  return name.split(' ').slice(0, 2).map(w => w[0] || '').join('');
+}
+
+function trendRowHTML(x, isUp) {
+  const d = x.d;
+  return `
+    <div class="row-item">
+      <span class="avatar sm ${isUp ? 'av-emerald' : 'av-rose'}">${initialsOf(d.name)}</span>
+      <div>
+        <div class="t">${d.name}</div>
+        <div class="s">پایهٔ ${d.grade} — کلاس ${d.cls} • معدل ${toFa(d.gpa)} • وضعیت: ${d.status}</div>
+      </div>
+      <div class="end">
+        <span class="chip ${isUp ? 'up' : 'down'}"><i class="bi bi-arrow-${isUp ? 'up' : 'down'}-short"></i>${toFa(Math.abs(x.trend))} ${isUp ? 'پیشرفت' : 'افت'}</span>
+        <div class="d-flex gap-1 mt-1 justify-content-end">
+          <button class="btn btn-ghost btn-sm-brand" onclick="openMsgFor('${d.name}', ${isUp})">${isUp ? 'تقدیر به والدین' : 'پیام به والدین'}</button>
+          <button class="btn-icon-ghost" title="کارنامه" onclick="openReportTab()"><i class="bi bi-file-earmark-bar-graph"></i></button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function buildTrendLists() {
+  const all = $$('#studentTbody tr[data-name]')
+    .map(r => ({ d: r.dataset, trend: parseFloat(r.dataset.trend) || 0 }))
+    .filter(x => x.trend !== 0);
+  const down = all.filter(x => x.trend < 0).sort((a, b) => a.trend - b.trend);
+  const up = all.filter(x => x.trend > 0).sort((a, b) => b.trend - a.trend);
+
+  $('#trendDownList').innerHTML = down.length
+    ? down.map(x => trendRowHTML(x, false)).join('')
+    : '<div class="empty-hint mb-0">دانش‌آموزی با افت تحصیلی ثبت نشده — آفرین! 🌿</div>';
+  $('#trendUpList').innerHTML = up.length
+    ? up.map(x => trendRowHTML(x, true)).join('')
+    : '<div class="empty-hint mb-0">دانش‌آموزی با پیشرفت ثبت نشده است</div>';
+  $('#trendDownCount').textContent = toFa(down.length);
+  $('#trendUpCount').textContent = toFa(up.length);
+
+  /* هشدار داشبورد — فقط وقتی افت وجود دارد دیده می‌شود (مدیر سریع متوجه می‌شود) */
+  const alertCard = $('#declineAlert');
+  if (down.length) {
+    alertCard.classList.remove('d-none');
+    $('#declineAlertCount').textContent = toFa(down.length);
+    $('#declineAlertList').innerHTML = down.slice(0, 3).map(x => `
+      <div class="col-12 col-sm-6">
+        <button class="mini-student" onclick="showView('trend')" title="مشاهده در صفحهٔ افت و پیشرفت">
+          <span class="avatar sm av-rose">${initialsOf(x.d.name)}</span>
+          <span class="flex-grow-1"><span class="ms-t d-block">${x.d.name}</span><span class="ms-s">پایهٔ ${x.d.grade} • معدل ${toFa(x.d.gpa)}</span></span>
+          <span class="chip down"><i class="bi bi-arrow-down-short"></i>${toFa(Math.abs(x.trend))}</span>
+        </button>
+      </div>`).join('');
+  } else {
+    alertCard.classList.add('d-none');
+  }
+}
+
+/* پیام سریع به والدین از صفحهٔ افت/پیشرفت — مودال پیام با دانش‌آموز انتخاب‌شده باز می‌شود */
+function openMsgFor(name, praise) {
+  showView('messages');
+  const sel = $('#msgStudent');
+  if ([...sel.options].some(o => o.textContent === name)) sel.value = name;
+  $('#msgText').value = praise
+    ? `والدین محترم؛ از پیشرفت تحصیلی «${name}» خوشحالیم و این موفقیت را به شما و فرزندتان تبریک می‌گوییم. — مدیریت مدرسه`
+    : '';
+  bootstrap.Modal.getOrCreateInstance($('#msgModal')).show();
+}
+
+/* ============================================================
    تور راهنمای اسپات‌لایت — مدیر هیچ‌وقت گم نمی‌شود
-   (۵ گام؛ هدف هر گام: آیتم سایدبار در دسکتاپ یا نوار پایین در موبایل)
+   (۶ گام؛ هدف هر گام: آیتم سایدبار در دسکتاپ یا نوار پایین در موبایل)
    ============================================================ */
 const TOUR_STEPS = [
   { view: 'dashboard',  t: 'خانه — مرکز همهٔ کارها', d: 'کارت‌های بزرگِ «کارهای پرتکرار» مهم‌ترین کارهای روزانه را یک‌کلیکه باز می‌کنند؛ آمار و نمودارها هم پایین‌ترِ همین صفحه است.' },
   { view: 'attendance', t: 'حضور و غیاب در ۳ گام', d: 'اول کلاس را انتخاب می‌کنید، بعد وضعیت هر دانش‌آموز را علامت می‌زنید و در پایان تأیید و ارسال. غیبت‌ها خودکار به والدین پیامک می‌شود.' },
   { view: 'students',   t: 'دانش‌آموزان در یک‌جا', d: 'سه تب ساده: «فهرست دانش‌آموزان» با فیلتر و جستجو، «کارنامه و گزارش» برای روند تحصیلی، و «معلمان و کلاس‌ها».' },
+  { view: 'trend',      t: 'افت و پیشرفت تحصیلی', d: 'اینجا هشدار افت تحصیلی و فهرست دانش‌آموزان در حال پیشرفت را یک‌جا می‌بینید؛ برای هر دانش‌آموز می‌توانید سریع به والدین پیام بدهید.' },
   { view: 'grades',     t: 'نمرات و امتحانات', d: 'در تب «ثبت نمرات» نمرهٔ هر آزمون را وارد می‌کنید و در تب «فهرست امتحانات» تقویم امتحانات را می‌بینید.' },
   { view: 'messages',   t: 'پیام به والدین', d: 'همهٔ پیامک‌های ارسالی اینجاست؛ پیام جدید را هم با دکمهٔ «ارسال پیام جدید» از همین صفحه بفرستید.' },
 ];
@@ -466,15 +581,25 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#searchStudent').addEventListener('input', applyStudentFilters);
   applyStudentFilters();
 
+  /* لیست‌های افت و پیشرفت (از جدول دانش‌آموزان) + هشدار داشبورد */
+  buildTrendLists();
+
   /* ویزارد حضور و غیاب */
   $$('#attClassCards .cls-card').forEach(c => c.addEventListener('click', () => selectAttClass(c)));
-  $('#attToStep2').addEventListener('click', () => goAttStep(2));
+  $('#attToStep2').addEventListener('click', () => {
+    /* ورود به جدول ثبت وضعیت = فهرست تازه؛ جستجوی قبلی پاک می‌شود */
+    const s = $('#attSearch');
+    if (s) s.value = '';
+    applyAttSearch();
+    goAttStep(2);
+  });
   $('#attBack1').addEventListener('click', () => goAttStep(1));
   $('#attToStep3').addEventListener('click', () => goAttStep(3));
   $('#attBack2').addEventListener('click', () => goAttStep(2));
   $('#btnNotify').addEventListener('click', () => finishAttendance(true));
   $('#attRestart').addEventListener('click', attRestart);
   $('#attTbody').addEventListener('click', onSegClick);
+  $('#attSearch').addEventListener('input', applyAttSearch);
   updateAttSummary();
 
   /* نمرات */
