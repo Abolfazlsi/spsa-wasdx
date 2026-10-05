@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>پورتال خانواده | سامانه پایش هوشمند عملکرد دانش‌آموز</title>
+  <meta name="description" content="مشاهدهٔ کارنامه، وضعیت تحصیلی و حضور و غیاب فرزند — پورتال خانوادهٔ سامانه پایش هوشمند">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     پورتال خانواده — صفحهٔ مستقل از index.html
+     برای نمونه، دادهٔ فقط «یک دانش‌آموز» در تگ‌های HTML قرار گرفته
+     است. در نسخهٔ نهایی، بر اساس شمارهٔ تلفن همراه والدین، همین
+     بخش‌ها به‌صورت پویا با کارنامهٔ فرزند همان خانواده پر می‌شود.
+     ══════════════════════════════════════════════════════════════ -->
+
+<div class="main-area">
+
+  <!-- ═══════════ نوار بالا ═══════════ -->
+  <header class="topbar">
+    <span class="brand-logo" style="width:40px;height:40px;font-size:1.1rem"><i class="bi bi-house-heart-fill"></i></span>
+    <div class="me-1">
+      <h1 class="page-title">پورتال خانواده</h1>
+      <div class="crumb">کارنامه و وضعیت تحصیلی فرزند شما</div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 ms-auto">
+      <!-- شمارهٔ تماس ثبت‌شدهٔ والدین — مبنای شناسایی فرزند در نسخهٔ نهایی -->
+      <span class="chip flat p-2 d-none d-sm-inline-flex" id="parentPhoneChip" title="این شماره در نسخهٔ نهایی مبنای شناسایی فرزند شماست">
+        <i class="bi bi-telephone-fill"></i> شمارهٔ ثبت‌شده: <b dir="ltr">۰۹۱۲ ••• ۶۷۸۹</b>
+      </span>
+      <a class="btn btn-ghost btn-sm-brand text-nowrap" href="index.html"><i class="bi bi-box-arrow-in-right me-1"></i> سایت مدرسه</a>
+    </div>
+  </header>
+
+  <!-- محتوا -->
+  <main class="content">
+
+    <!-- بنر توضیح نسخهٔ نمایشی (چاپ نمی‌شود) -->
+    <div class="card-soft p-banner mb-4 no-print" role="note">
+      <span class="p-banner-icon"><i class="bi bi-info-circle-fill"></i></span>
+      <div>
+        <b>این صفحهٔ نمونهٔ «پورتال خانواده» است.</b>
+        <span class="text-muted">در نسخهٔ نهایی، هر خانواده با شمارهٔ تلفن همراه خود وارد می‌شود و سامانه به‌صورت خودکار فرزند او را شناسایی کرده و فقط کارنامهٔ فرزندِ خودش را نشان می‌دهد. فعلاً برای نمایش، اطلاعات یک دانش‌آموز نمونه قرار داده شده است.</span>
+      </div>
+    </div>
+
+    <!-- ═══════════ کارت شناسنامهٔ دانش‌آموز ═══════════
+         دادهٔ دانش‌آموز نمونه — مستقیم داخل تگ‌های HTML
+         (در نسخهٔ نهایی بر اساس شمارهٔ تلفن والدین به‌صورت پویا پر می‌شود) -->
+    <section class="card-soft p-hero mb-4" id="childHero" aria-label="مشخصات دانش‌آموز"
+             data-name="علی رضایی" data-id="۱۰۴۲" data-grade="نهم" data-cls="۱" data-year="۱۴۰۳–۱۴۰۴"
+             data-gpa="18.4" data-attend="96" data-rank="3" data-absent-days="3" data-parent-phone="09123456789">
+      <div class="card-body">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <span class="avatar lg av-teal p-hero-avatar">عر</span>
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <span class="fw-bold fs-5">علی رضایی</span>
+              <span class="status-pill st-excellent">وضعیت تحصیلی: عالی</span>
+            </div>
+            <div class="text-muted" style="font-size:.78rem">
+              کد دانش‌آموزی: ۱۰۴۲ • پایهٔ نهم — کلاس ۱ • سال تحصیلی ۱۴۰۳–۱۴۰۴
+            </div>
+          </div>
+          <button class="btn btn-ghost no-print" id="btnPrintCar"><i class="bi bi-printer me-1"></i> چاپ کارنامه</button>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <span class="chip up"><i class="bi bi-graph-up-arrow"></i> روند صعودی — ۱٫۲ نمره بهبود</span>
+          <span class="chip flat"><i class="bi bi-award"></i> قوی‌ترین درس: مطالعات اجتماعی</span>
+          <span class="chip down"><i class="bi bi-exclamation-triangle"></i> نیازمند تقویت: علوم تجربی</span>
+          <span class="chip flat"><i class="bi bi-person-video3"></i> معلم راهنما: پویا صالحی</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ ۴ شاخص اصلی (اعداد و روند، همه در data-attribute های HTML) ═══════════ -->
+    <section aria-label="شاخص‌های اصلی وضعیت تحصیلی" class="mb-4">
+      <div class="row g-3">
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="card-soft stat-card">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="stat-num text-success">۱۸٫۴۰</div>
+                <div class="stat-label">معدل کل</div>
+                <span class="chip up mt-1"><i class="bi bi-arrow-up-short"></i>۱٫۲ نسبت به مهر</span>
+              </div>
+              <div>
+                <span class="stat-icon bg-soft-brand"><i class="bi bi-award-fill"></i></span>
+                <div class="mt-2 js-spark" style="width:96px" data-points="17.2,17.6,18,18.3,18.4" data-color="#0d9488" role="img" aria-label="روند صعودی معدل"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="card-soft stat-card">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="stat-num" style="color:var(--brand-600)">۹۶٪</div>
+                <div class="stat-label">درصد حضور سال</div>
+                <span class="chip flat mt-1">۱۲۰ روز حاضر از ۱۲۵ روز</span>
+              </div>
+              <div>
+                <span class="stat-icon bg-soft-emerald"><i class="bi bi-calendar2-check-fill"></i></span>
+                <div class="mt-2 js-spark" style="width:96px" data-points="94,97,95,98,96" data-color="#10b981" role="img" aria-label="روند درصد حضور"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="card-soft stat-card">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="stat-num" style="color:var(--amber)">۳</div>
+                <div class="stat-label">رتبه در مدرسه</div>
+                <span class="chip up mt-1"><i class="bi bi-arrow-up-short"></i>۲ پله بهبود</span>
+              </div>
+              <span class="stat-icon bg-soft-amber"><i class="bi bi-trophy-fill"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="card-soft stat-card">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="stat-num" style="color:var(--rose)">۳</div>
+                <div class="stat-label">روز غیبت در سال</div>
+                <span class="chip flat mt-1">۱ مورد با اطلاع قبلی</span>
+              </div>
+              <span class="stat-icon bg-soft-rose"><i class="bi bi-person-x-fill"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ روند معدل ماهانه + دونات حضور ═══════════
+         دادهٔ نمودارها فقط در data-attribute های همین تگ‌هاست؛
+         parent.js آن‌ها را می‌خواند و SVG را ترسیم می‌کند. -->
+    <div class="row g-3 mb-4">
+      <div class="col-lg-7">
+        <div class="card-soft h-100">
+          <div class="card-head">
+            <div><h6><i class="bi bi-graph-up text-success me-1"></i> روند معدل ماهانهٔ فرزند شما</h6><span class="hint">در مقایسه با میانگین کلاس</span></div>
+            <span class="chip flat">۵ ماه اخیر</span>
+          </div>
+          <div class="card-body">
+            <div class="chart-wrap" id="trendCard"
+                 data-months="مهر,آبان,آذر,دی,بهمن"
+                 data-student="17.2,17.6,18,18.3,18.4"
+                 data-class="17.4,17.5,17.6,17.7,17.8">
+              <div id="trendChart" role="img" aria-label="نمودار روند معدل ماهانه — صعودی از ۱۷٫۲ به ۱۸٫۴"></div>
+            </div>
+            <div class="legend mt-3">
+              <span class="li"><span class="swatch" style="background:#0d9488"></span>فرزند شما</span>
+              <span class="li"><span class="swatch" style="background:#cbd5d3"></span>میانگین کلاس</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card-soft h-100">
+          <div class="card-head"><h6><i class="bi bi-calendar2-check text-success me-1"></i> خلاصهٔ حضور و غیاب سال</h6><span class="hint">۱۲۵ روز کاری ثبت‌شده</span></div>
+          <div class="card-body d-flex flex-column align-items-center gap-3">
+            <div class="chart-wrap" style="max-width:220px" id="attDonutCard"
+                 data-total="125" data-present="120" data-absent="3" data-late="1" data-excused="1">
+              <div id="attDonut" role="img" aria-label="نمودار دونات حضور سال — ۹۶ درصد"></div>
+            </div>
+            <div class="legend justify-content-center">
+              <span class="li"><span class="swatch" style="background:#10b981"></span>حاضر: ۱۲۰ روز</span>
+              <span class="li"><span class="swatch" style="background:#e11d48"></span>غایب: ۳ روز</span>
+              <span class="li"><span class="swatch" style="background:#f59e0b"></span>تأخیر: ۱ روز</span>
+              <span class="li"><span class="swatch" style="background:#94a3b8"></span>مجوز: ۱ روز</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ کارنامهٔ دروس (۵ درس — داده مستقیم در تگ‌های HTML) ═══════════ -->
+    <div class="card-soft mb-4">
+      <div class="card-head">
+        <h6><i class="bi bi-file-earmark-bar-graph text-success me-1"></i> کارنامهٔ دروس — نوبت اول</h6>
+        <span class="hint">مستمر و میان‌ترم از ۲۰ — نهایی: وزنی</span>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-clean align-middle" id="gradeTable">
+          <thead>
+            <tr><th>درس</th><th>مستمر</th><th>میان‌ترم</th><th>پایان‌ترم</th><th>نمرهٔ نهایی</th><th>وضعیت</th><th>دبیر</th></tr>
+          </thead>
+          <tbody id="gradeTbody">
+            <tr data-subject="ریاضی" data-cc="18.75" data-mid="17.5" data-fin="17.5" data-final="17.75">
+              <td class="fw-bold">ریاضی</td>
+              <td>۱۸٫۷۵</td><td>۱۷٫۵۰</td><td>۱۷٫۵۰</td>
+              <td><b class="text-success">۱۷٫۷۵</b></td>
+              <td><span class="status-pill st-excellent">عالی</span></td>
+              <td class="text-muted" style="font-size:.75rem">علی کریمی</td>
+            </tr>
+            <tr data-subject="علوم تجربی" data-cc="18.25" data-mid="15.75" data-fin="15" data-final="16">
+              <td class="fw-bold">علوم تجربی</td>
+              <td>۱۸٫۲۵</td><td>۱۵٫۷۵</td><td>۱۵٫۰۰</td>
+              <td><b class="text-success">۱۶٫۰۰</b></td>
+              <td><span class="status-pill st-good">خوب</span></td>
+              <td class="text-muted" style="font-size:.75rem">حسین موسوی</td>
+            </tr>
+            <tr data-subject="فارسی و نگارش" data-cc="17" data-mid="16" data-fin="15.75" data-final="16">
+              <td class="fw-bold">فارسی و نگارش</td>
+              <td>۱۷٫۰۰</td><td>۱۶٫۰۰</td><td>۱۵٫۷۵</td>
+              <td><b class="text-success">۱۶٫۰۰</b></td>
+              <td><span class="status-pill st-good">خوب</span></td>
+              <td class="text-muted" style="font-size:.75rem">مریم احمدی</td>
+            </tr>
+            <tr data-subject="زبان انگلیسی" data-cc="18.25" data-mid="17" data-fin="15.25" data-final="16.5">
+              <td class="fw-bold">زبان انگلیسی</td>
+              <td>۱۸٫۲۵</td><td>۱۷٫۰۰</td><td>۱۵٫۲۵</td>
+              <td><b class="text-success">۱۶٫۵۰</b></td>
+              <td><span class="status-pill st-good">خوب</span></td>
+              <td class="text-muted" style="font-size:.75rem">سارا رحیمی</td>
+            </tr>
+            <tr data-subject="مطالعات اجتماعی" data-cc="20" data-mid="19.75" data-fin="17.25" data-final="18.5">
+              <td class="fw-bold">مطالعات اجتماعی</td>
+              <td>۲۰٫۰۰</td><td>۱۹٫۷۵</td><td>۱۷٫۲۵</td>
+              <td><b class="text-success">۱۸٫۵۰</b></td>
+              <td><span class="status-pill st-excellent">عالی</span></td>
+              <td class="text-muted" style="font-size:.75rem">کیوان رستمی</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- مقایسهٔ تصویری نمرهٔ نهایی دروس (از همین جدول بالا خوانده می‌شود) -->
+    <div class="card-soft mb-4">
+      <div class="card-head"><h6><i class="bi bi-bar-chart text-success me-1"></i> مقایسهٔ تصویری نمرهٔ نهایی دروس</h6><span class="hint">از ۲۰</span></div>
+      <div class="card-body" id="subjectBars"><!-- با جاوااسکریپت از ردیف‌های جدول کارنامه ساخته می‌شود --></div>
+    </div>
+
+    <!-- ═══════════ سابقهٔ حضور و غیاب (۵ جلسهٔ اخیر — داده مستقیم در تگ‌های HTML) ═══════════ -->
+    <div class="card-soft">
+      <div class="card-head">
+        <div><h6><i class="bi bi-clock-history text-success me-1"></i> حضور و غیاب ۵ جلسهٔ اخیر</h6><span class="hint">تازه‌ترین وضعیت‌های ثبت‌شدهٔ فرزند شما</span></div>
+        <span class="chip up"><i class="bi bi-check-circle"></i> ۴ جلسه حاضر</span>
+      </div>
+      <div class="card-body pt-1">
+        <div class="row-item">
+          <span class="avatar sm av-emerald"><i class="bi bi-check-lg"></i></span>
+          <div>
+            <div class="t">چهارشنبه ۲۱ آذر</div>
+            <div class="s">حضور به‌موقع — همهٔ جلسات برگزار شد</div>
+          </div>
+          <div class="end"><span class="status-pill st-excellent">حاضر</span></div>
+        </div>
+        <div class="row-item">
+          <span class="avatar sm av-amber"><i class="bi bi-clock"></i></span>
+          <div>
+            <div class="t">سه‌شنبه ۲۰ آذر</div>
+            <div class="s">۱۰ دقیقه تأخیر در ورود — به مدرسه اطلاع داده شد</div>
+          </div>
+          <div class="end"><span class="status-pill st-warn">تأخیر</span></div>
+        </div>
+        <div class="row-item">
+          <span class="avatar sm av-emerald"><i class="bi bi-check-lg"></i></span>
+          <div>
+            <div class="t">دوشنبه ۱۹ آذر</div>
+            <div class="s">حضور به‌موقع — همهٔ جلسات برگزار شد</div>
+          </div>
+          <div class="end"><span class="status-pill st-excellent">حاضر</span></div>
+        </div>
+        <div class="row-item">
+          <span class="avatar sm av-emerald"><i class="bi bi-check-lg"></i></span>
+          <div>
+            <div class="t">یکشنبه ۱۸ آذر</div>
+            <div class="s">حضور به‌موقع — همهٔ جلسات برگزار شد</div>
+          </div>
+          <div class="end"><span class="status-pill st-excellent">حاضر</span></div>
+        </div>
+        <div class="row-item">
+          <span class="avatar sm av-rose"><i class="bi bi-x-lg"></i></span>
+          <div>
+            <div class="t">شنبه ۱۶ آذر</div>
+            <div class="s">غیبت موجه — با اطلاع قبلی والدین (بیماری)</div>
+          </div>
+          <div class="end"><span class="status-pill st-danger">غایب</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/parent.js"></script>
+</body>
+</html>
